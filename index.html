@@ -1,1 +1,3176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lezkairu Alevín D</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul: #123b68;
+            --azul-claro: #eaf2f9;
+            --azul-medio: #1d5b96;
+            --verde: #16844a;
+            --rojo: #c73b3b;
+            --gris: #667085;
+            --gris-claro: #f4f6f8;
+            --borde: #d9dee5;
+            --blanco: #ffffff;
+            --negro: #182230;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: var(--negro);
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* LOGIN */
+
+        #login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #123b68, #1d5b96);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: var(--azul);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .login-card h1 {
+            text-align: center;
+            margin: 0;
+            color: var(--azul);
+            font-size: 28px;
+        }
+
+        .login-card .subtitle {
+            text-align: center;
+            color: var(--gris);
+            margin: 8px 0 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            padding: 12px 13px;
+            background: white;
+            color: var(--negro);
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--azul-medio);
+            box-shadow: 0 0 0 3px rgba(29, 91, 150, 0.10);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: 700;
+            transition: 0.15s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--azul);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--azul-claro);
+            color: var(--azul);
+        }
+
+        .btn-success {
+            background: var(--verde);
+            color: white;
+        }
+
+        .btn-danger {
+            background: #fbeaea;
+            color: var(--rojo);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .message.error {
+            background: #fdecec;
+            color: #a52323;
+        }
+
+        .message.success {
+            background: #eaf8f0;
+            color: #126438;
+        }
+
+        /* APP */
+
+        #app {
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: var(--azul);
+            color: white;
+            padding: 14px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+        }
+
+        .topbar-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: white;
+            color: var(--azul);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand small {
+            display: block;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-name {
+            font-weight: 700;
+        }
+
+        .logout {
+            border: 1px solid rgba(255,255,255,0.4);
+            background: transparent;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        .nav {
+            background: white;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .nav-btn {
+            border: 0;
+            background: transparent;
+            padding: 14px 17px;
+            color: var(--gris);
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-btn.active {
+            color: var(--azul);
+            border-bottom-color: var(--azul);
+            font-weight: 700;
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 25px 18px 50px;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+        }
+
+        .page-title h2 {
+            margin: 0;
+            font-size: 28px;
+            color: var(--azul);
+        }
+
+        .page-title p {
+            color: var(--gris);
+            margin: 6px 0 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--borde);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--azul);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid var(--borde);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--azul);
+        }
+
+        .stat-label {
+            color: var(--gris);
+            margin-top: 5px;
+        }
+
+        .player-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .player-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 13px;
+            background: white;
+        }
+
+        .player-info strong {
+            display: block;
+        }
+
+        .player-info small {
+            color: var(--gris);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: var(--azul-claro);
+            color: var(--azul);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* RATING */
+
+        .session-box {
+            background: var(--azul-claro);
+            border: 1px solid #cbdceb;
+            padding: 18px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .criterion {
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 15px;
+            background: white;
+        }
+
+        .criterion-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .rating-buttons {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+        }
+
+        .rating-btn {
+            border: 1px solid #ccd3dc;
+            background: white;
+            border-radius: 7px;
+            padding: 8px 2px;
+            font-weight: 700;
+            color: var(--gris);
+        }
+
+        .rating-btn:hover {
+            border-color: var(--azul);
+        }
+
+        .rating-btn.selected {
+            background: var(--azul);
+            color: white;
+            border-color: var(--azul);
+        }
+
+        .clear-rating {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--gris);
+            border: 0;
+            background: transparent;
+            padding: 0;
+        }
+
+        .save-area {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+            background: white;
+        }
+
+        th,
+        td {
+            padding: 11px 10px;
+            border-bottom: 1px solid var(--borde);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        th {
+            background: var(--azul);
+            color: white;
+            font-size: 13px;
+        }
+
+        td:first-child,
+        th:first-child {
+            text-align: left;
+            position: sticky;
+            left: 0;
+        }
+
+        td:first-child {
+            background: white;
+            font-weight: 700;
+        }
+
+        .average {
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--gris);
+            padding: 30px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            align-items: end;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .toolbar-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .toolbar-button {
+            min-width: 150px;
+        }
+
+        .session-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .session-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            padding: 13px;
+        }
+
+        .session-item:hover {
+            background: var(--gris-claro);
+        }
+
+        .session-info strong {
+            display: block;
+        }
+
+        .session-info small {
+            color: var(--gris);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .notice {
+            background: #fff7df;
+            border: 1px solid #ead9a2;
+            color: #765d11;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .success-box {
+            background: #eaf8f0;
+            border: 1px solid #bfe5cd;
+            color: #126438;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 800px) {
+            .grid,
+            .criteria-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar-inner {
+                align-items: flex-start;
+            }
+
+            .user-area {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .user-name {
+                font-size: 13px;
+            }
+
+            .brand h1 {
+                font-size: 17px;
+            }
+
+            .main {
+                padding: 18px 12px 40px;
+            }
+
+            .rating-buttons {
+                gap: 4px;
+            }
+
+            .rating-btn {
+                padding: 9px 0;
+            }
+
+            .save-area {
+                display: block;
+            }
+
+            .save-area .btn {
+                width: 100%;
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!-- LOGIN -->
+<!-- ========================================================= -->
+
+<div id="login-screen">
+
+    <div class="login-card">
+
+        <div class="logo">LD</div>
+
+        <h1>Lezkairu Alevín D</h1>
+        <div class="subtitle">Sistema de evaluación del equipo</div>
+
+        <form id="login-form">
+
+            <div class="form-group">
+                <label for="login-email">Correo electrónico</label>
+                <input
+                    type="email"
+                    id="login-email"
+                    placeholder="Introduce tu correo"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Contraseña</label>
+                <input
+                    type="password"
+                    id="login-password"
+                    placeholder="Introduce tu contraseña"
+                    required
+                >
+            </div>
+
+            <button class="btn btn-primary btn-full" type="submit">
+                Entrar
+            </button>
+
+        </form>
+
+        <div id="login-message" class="message hidden"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- APP -->
+<!-- ========================================================= -->
+
+<div id="app" class="hidden">
+
+    <header class="topbar">
+
+        <div class="topbar-inner">
+
+            <div class="brand">
+
+                <div class="brand-logo">LD</div>
+
+                <div>
+                    <h1>Lezkairu Alevín D</h1>
+                    <small>Evaluación de rendimiento</small>
+                </div>
+
+            </div>
+
+            <div class="user-area">
+
+                <span id="current-user-name" class="user-name"></span>
+
+                <button id="logout-btn" class="logout">
+                    Salir
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <nav class="nav">
+
+        <div class="nav-inner">
+
+            <button class="nav-btn active" data-page="home">
+                🏠 Inicio
+            </button>
+
+            <button class="nav-btn" data-page="sessions">
+                📅 Sesiones
+            </button>
+
+            <button class="nav-btn" data-page="rate">
+                ⭐ Valorar
+            </button>
+
+            <button class="nav-btn" data-page="summary">
+                📊 Resumen
+            </button>
+
+            <button class="nav-btn" data-page="players">
+                👥 Jugadores
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="main">
+
+        <!-- ================================================= -->
+        <!-- HOME -->
+        <!-- ================================================= -->
+
+        <section id="page-home" class="page">
+
+            <div class="page-title">
+
+                <h2>Bienvenido</h2>
+
+                <p>
+                    Panel de evaluación de Lezkairu Alevín D.
+                </p>
+
+            </div>
+
+
+            <div class="stat-grid">
+
+                <div class="stat">
+
+                    <div id="stat-players" class="stat-number">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Jugadores
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div id="stat-sessions" class="stat-number">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Sesiones
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div id="stat-ratings" class="stat-number">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Valoraciones
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <h3>⚽ Nueva valoración</h3>
+
+                    <p>
+                        Selecciona una sesión y un jugador para valorar
+                        su rendimiento del 1 al 10.
+                    </p>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="showPage('rate')"
+                    >
+                        Ir a valorar
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>📊 Resumen del equipo</h3>
+
+                    <p>
+                        Consulta las valoraciones realizadas por Arkaitz,
+                        Aritz y Garikoitz y sus medias.
+                    </p>
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="showPage('summary')"
+                    >
+                        Ver resumen
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- SESIONES -->
+        <!-- ================================================= -->
+
+        <section id="page-sessions" class="page hidden">
+
+            <div class="page-title">
+
+                <h2>Sesiones</h2>
+
+                <p>
+                    Crea los entrenamientos y partidos que posteriormente
+                    se utilizarán para realizar las valoraciones.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>➕ Crear nueva sesión</h3>
+
+                <form id="session-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="session-date">
+                                Fecha
+                            </label>
+
+                            <input
+                                type="date"
+                                id="session-date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="session-type">
+                                Tipo
+                            </label>
+
+                            <select id="session-type" required>
+
+                                <option value="Entrenamiento">
+                                    Entrenamiento
+                                </option>
+
+                                <option value="Partido">
+                                    Partido
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="session-title">
+                                Nombre / descripción (opcional)
+                            </label>
+
+                            <input
+                                type="text"
+                                id="session-title"
+                                placeholder="Ej. Entrenamiento técnico o Partido vs. XXX"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                    >
+                        Crear sesión
+                    </button>
+
+                </form>
+
+                <div id="session-message" class="message hidden"></div>
+
+            </div>
+
+
+            <div class="card" style="margin-top:20px;">
+
+                <h3>📅 Sesiones existentes</h3>
+
+                <div id="sessions-list" class="session-list"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- RATE -->
+        <!-- ================================================= -->
+
+        <section id="page-rate" class="page hidden">
+
+            <div class="page-title">
+
+                <h2>⭐ Valorar jugador</h2>
+
+                <p>
+                    Las valoraciones no son obligatorias. Puedes dejar
+                    cualquier criterio sin puntuar.
+                </p>
+
+            </div>
+
+
+            <div class="session-box">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="rate-session">
+                            Sesión
+                        </label>
+
+                        <select id="rate-session">
+                            <option value="">
+                                Selecciona una sesión
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="rate-player">
+                            Jugador
+                        </label>
+
+                        <select id="rate-player">
+                            <option value="">
+                                Selecciona un jugador
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div id="rating-area" class="hidden">
+
+                <div class="card">
+
+                    <div id="selected-player-info"></div>
+
+                    <div
+                        id="criteria-container"
+                        class="criteria-grid"
+                    ></div>
+
+
+                    <div class="form-group" style="margin-top:20px;">
+
+                        <label for="rating-comment">
+                            Comentario del entrenador (opcional)
+                        </label>
+
+                        <textarea
+                            id="rating-comment"
+                            placeholder="Observaciones sobre el rendimiento del jugador..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="save-area">
+
+                        <button
+                            id="clear-rating-btn"
+                            class="btn btn-secondary"
+                        >
+                            Limpiar
+                        </button>
+
+                        <button
+                            id="save-rating-btn"
+                            class="btn btn-success"
+                        >
+                            💾 Guardar valoración
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="rating-message"
+                        class="message hidden"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="rate-empty"
+                class="card"
+            >
+
+                <div class="empty">
+                    Selecciona una sesión y un jugador para comenzar.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- SUMMARY -->
+        <!-- ================================================= -->
+
+        <section id="page-summary" class="page hidden">
+
+            <div class="page-title">
+
+                <h2>📊 Resumen</h2>
+
+                <p>
+                    Comparación de las valoraciones realizadas por
+                    los tres entrenadores.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="toolbar">
+
+                    <div class="toolbar-item">
+
+                        <label for="summary-session">
+                            Sesión
+                        </label>
+
+                        <select id="summary-session">
+
+                            <option value="">
+                                Selecciona una sesión
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="summary-container"
+                    class="hidden"
+                >
+
+                    <div class="notice">
+                        La media se calcula únicamente con las
+                        valoraciones existentes. Si un entrenador
+                        no ha valorado un jugador o criterio, no se
+                        considera como un 0.
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Jugador</th>
+                                    <th>Arkaitz</th>
+                                    <th>Aritz</th>
+                                    <th>Garikoitz</th>
+                                    <th>Media</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="summary-body"></tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div
+                        id="summary-detail"
+                        style="margin-top:25px;"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    id="summary-empty"
+                    class="empty"
+                >
+                    Selecciona una sesión para ver el resumen.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- PLAYERS -->
+        <!-- ================================================= -->
+
+        <section id="page-players" class="page hidden">
+
+            <div class="page-title">
+
+                <h2>👥 Jugadores</h2>
+
+                <p>
+                    Añade y administra los jugadores del equipo.
+                    Actualmente la aplicación está preparada para
+                    ampliar la plantilla más allá de 14 jugadores.
+                </p>
+
+            </div>
+
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <h3>➕ Añadir jugador</h3>
+
+                    <form id="player-form">
+
+                        <div class="form-group">
+
+                            <label for="player-name">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                id="player-name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="player-surname">
+                                Apellidos
+                            </label>
+
+                            <input
+                                type="text"
+                                id="player-surname"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="player-position">
+                                Posición
+                            </label>
+
+                            <select
+                                id="player-position"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona posición
+                                </option>
+
+                                <option value="Portero">
+                                    Portero
+                                </option>
+
+                                <option value="Defensa">
+                                    Defensa
+                                </option>
+
+                                <option value="Lateral">
+                                    Lateral
+                                </option>
+
+                                <option value="Centrocampista">
+                                    Centrocampista
+                                </option>
+
+                                <option value="Extremo">
+                                    Extremo
+                                </option>
+
+                                <option value="Delantero">
+                                    Delantero
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="player-foot">
+                                Pierna dominante
+                            </label>
+
+                            <select
+                                id="player-foot"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona lateralidad
+                                </option>
+
+                                <option value="Diestro">
+                                    Diestro
+                                </option>
+
+                                <option value="Zurdo">
+                                    Zurdo
+                                </option>
+
+                                <option value="Ambidiestro">
+                                    Ambidiestro
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-primary"
+                            type="submit"
+                        >
+                            Añadir jugador
+                        </button>
+
+                    </form>
+
+                    <div
+                        id="player-message"
+                        class="message hidden"
+                    ></div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>📋 Plantilla</h3>
+
+                    <div
+                        id="players-list"
+                        class="player-list"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* =========================================================
+       CONFIGURACIÓN SUPABASE
+       ========================================================= */
+
+    const SUPABASE_URL =
+        "https://tucuzbuprnyaytiqjfli.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_nb-wKitnYa7Or9EOqfQKDA_CStPNA_y";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+
+
+    /* =========================================================
+       VARIABLES
+       ========================================================= */
+
+    let currentUser = null;
+    let currentCoach = null;
+
+    let players = [];
+    let sessions = [];
+    let currentRating = {};
+
+    const criteria = [
+        { key: "control", label: "Control" },
+        { key: "pase", label: "Pase" },
+        { key: "cabeceo", label: "Cabeceo" },
+        { key: "golpeo", label: "Golpeo" },
+        { key: "regate", label: "Regate" },
+        { key: "posicionamiento", label: "Posicionamiento" },
+        { key: "decisiones", label: "Decisiones" },
+        { key: "trabajo_colectivo", label: "Trabajo colectivo" },
+        { key: "resistencia", label: "Resistencia" },
+        { key: "velocidad", label: "Velocidad" },
+        { key: "fuerza", label: "Fuerza" },
+        { key: "agilidad", label: "Agilidad" },
+        { key: "motivacion", label: "Motivación" },
+        { key: "implicacion", label: "Implicación" },
+        { key: "liderazgo", label: "Liderazgo" },
+        { key: "paradas", label: "Paradas" }
+    ];
+
+
+    /* =========================================================
+       INICIO
+       ========================================================= */
+
+    document.addEventListener("DOMContentLoaded", async () => {
+
+        setTodayDate();
+
+        setupNavigation();
+        setupLogin();
+        setupLogout();
+        setupSessions();
+        setupPlayers();
+        setupRating();
+
+        const {
+            data: {
+                session
+            }
+        } = await supabaseClient.auth.getSession();
+
+        if (session) {
+            await startApp(session.user);
+        }
+
+    });
+
+
+    /* =========================================================
+       LOGIN
+       ========================================================= */
+
+    function setupLogin() {
+
+        document
+            .getElementById("login-form")
+            .addEventListener("submit", async (event) => {
+
+                event.preventDefault();
+
+                const email =
+                    document
+                        .getElementById("login-email")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("login-password")
+                        .value;
+
+                showMessage(
+                    "login-message",
+                    "Comprobando acceso...",
+                    "success"
+                );
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) {
+
+                    showMessage(
+                        "login-message",
+                        "No se ha podido iniciar sesión. Comprueba el correo y la contraseña.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+                await startApp(data.user);
+
+            });
+
+    }
+
+
+    async function startApp(user) {
+
+        currentUser = user;
+
+        const {
+            data: coach,
+            error
+        } = await supabaseClient
+            .from("entrenadores")
+            .select("*")
+            .eq("user_id", user.id)
+            .eq("activo", true)
+            .single();
+
+        if (error || !coach) {
+
+            await supabaseClient.auth.signOut();
+
+            document
+                .getElementById("login-screen")
+                .classList.remove("hidden");
+
+            document
+                .getElementById("app")
+                .classList.add("hidden");
+
+            showMessage(
+                "login-message",
+                "La cuenta existe, pero no está vinculada a ningún entrenador.",
+                "error"
+            );
+
+            return;
+        }
+
+        currentCoach = coach;
+
+        document
+            .getElementById("current-user-name")
+            .textContent = coach.nombre;
+
+        document
+            .getElementById("login-screen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("app")
+            .classList.remove("hidden");
+
+        await loadAllData();
+
+        showPage("home");
+
+    }
+
+
+    /* =========================================================
+       LOGOUT
+       ========================================================= */
+
+    function setupLogout() {
+
+        document
+            .getElementById("logout-btn")
+            .addEventListener("click", async () => {
+
+                await supabaseClient.auth.signOut();
+
+                currentUser = null;
+                currentCoach = null;
+
+                document
+                    .getElementById("app")
+                    .classList.add("hidden");
+
+                document
+                    .getElementById("login-screen")
+                    .classList.remove("hidden");
+
+            });
+
+    }
+
+
+    /* =========================================================
+       NAVEGACIÓN
+       ========================================================= */
+
+    function setupNavigation() {
+
+        document
+            .querySelectorAll(".nav-btn")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    showPage(
+                        button.dataset.page
+                    );
+
+                });
+
+            });
+
+    }
+
+
+    function showPage(page) {
+
+        document
+            .querySelectorAll(".page")
+            .forEach(section => {
+                section.classList.add("hidden");
+            });
+
+        const selected =
+            document.getElementById(
+                `page-${page}`
+            );
+
+        if (selected) {
+            selected.classList.remove("hidden");
+        }
+
+        document
+            .querySelectorAll(".nav-btn")
+            .forEach(button => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.page === page
+                );
+
+            });
+
+        if (page === "summary") {
+            renderSummarySessions();
+        }
+
+        if (page === "rate") {
+            renderRateSelectors();
+        }
+
+        if (page === "players") {
+            renderPlayers();
+        }
+
+        if (page === "sessions") {
+            renderSessions();
+        }
+
+        if (page === "home") {
+            updateStats();
+        }
+
+    }
+
+
+    /* =========================================================
+       CARGAR DATOS
+       ========================================================= */
+
+    async function loadAllData() {
+
+        await loadPlayers();
+        await loadSessions();
+        await updateStats();
+
+        renderPlayers();
+        renderSessions();
+        renderRateSelectors();
+        renderSummarySessions();
+
+    }
+
+
+    async function loadPlayers() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("jugadores")
+            .select("*")
+            .eq("activo", true)
+            .order("apellidos", {
+                ascending: true
+            })
+            .order("nombre", {
+                ascending: true
+            });
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+        }
+
+        players = data || [];
+
+    }
+
+
+    async function loadSessions() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("sesiones")
+            .select("*")
+            .order("fecha", {
+                ascending: false
+            });
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+        }
+
+        sessions = data || [];
+
+    }
+
+
+    /* =========================================================
+       ESTADÍSTICAS
+       ========================================================= */
+
+    async function updateStats() {
+
+        document
+            .getElementById("stat-players")
+            .textContent = players.length;
+
+        document
+            .getElementById("stat-sessions")
+            .textContent = sessions.length;
+
+
+        const {
+            count,
+            error
+        } = await supabaseClient
+            .from("valoraciones")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
+
+        document
+            .getElementById("stat-ratings")
+            .textContent = error ? 0 : count;
+
+    }
+
+
+    /* =========================================================
+       SESIONES
+       ========================================================= */
+
+    function setTodayDate() {
+
+        const today =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+        const input =
+            document.getElementById(
+                "session-date"
+            );
+
+        if (input) {
+            input.value = today;
+        }
+
+    }
+
+
+    function setupSessions() {
+
+        document
+            .getElementById("session-form")
+            .addEventListener("submit", async event => {
+
+                event.preventDefault();
+
+                const fecha =
+                    document
+                        .getElementById("session-date")
+                        .value;
+
+                const tipo =
+                    document
+                        .getElementById("session-type")
+                        .value;
+
+                const titulo =
+                    document
+                        .getElementById("session-title")
+                        .value
+                        .trim() || null;
+
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+                    .from("sesiones")
+                    .insert({
+                        fecha,
+                        tipo,
+                        titulo
+                    })
+                    .select()
+                    .single();
+
+
+                if (error) {
+
+                    showMessage(
+                        "session-message",
+                        "No se ha podido crear la sesión: " + error.message,
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                sessions.unshift(data);
+
+                renderSessions();
+                renderRateSelectors();
+                renderSummarySessions();
+
+                showMessage(
+                    "session-message",
+                    "Sesión creada correctamente.",
+                    "success"
+                );
+
+                document
+                    .getElementById("session-title")
+                    .value = "";
+
+            });
+
+    }
+
+
+    function renderSessions() {
+
+        const container =
+            document.getElementById(
+                "sessions-list"
+            );
+
+        if (!sessions.length) {
+
+            container.innerHTML =
+                `<div class="empty">
+                    Todavía no hay sesiones creadas.
+                </div>`;
+
+            return;
+        }
+
+
+        container.innerHTML =
+            sessions
+                .map(session => {
+
+                    const title =
+                        session.titulo ||
+                        session.tipo;
+
+                    return `
+                        <div class="session-item">
+
+                            <div class="session-info">
+
+                                <strong>
+                                    ${escapeHtml(title)}
+                                </strong>
+
+                                <small>
+                                    ${formatDate(session.fecha)}
+                                    · ${escapeHtml(session.tipo)}
+                                </small>
+
+                            </div>
+
+                            <button
+                                class="btn btn-secondary"
+                                onclick="selectSessionForRating(${session.id})"
+                            >
+                                Valorar
+                            </button>
+
+                        </div>
+                    `;
+
+                })
+                .join("");
+
+    }
+
+
+    function selectSessionForRating(id) {
+
+        showPage("rate");
+
+        setTimeout(() => {
+
+            document
+                .getElementById("rate-session")
+                .value = String(id);
+
+            updateRatingVisibility();
+
+        }, 50);
+
+    }
+
+
+    /* =========================================================
+       JUGADORES
+       ========================================================= */
+
+    function setupPlayers() {
+
+        document
+            .getElementById("player-form")
+            .addEventListener("submit", async event => {
+
+                event.preventDefault();
+
+                const jugador = {
+
+                    nombre:
+                        document
+                            .getElementById("player-name")
+                            .value
+                            .trim(),
+
+                    apellidos:
+                        document
+                            .getElementById("player-surname")
+                            .value
+                            .trim(),
+
+                    posicion:
+                        document
+                            .getElementById("player-position")
+                            .value,
+
+                    lateralidad:
+                        document
+                            .getElementById("player-foot")
+                            .value
+
+                };
+
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+                    .from("jugadores")
+                    .insert(jugador)
+                    .select()
+                    .single();
+
+
+                if (error) {
+
+                    showMessage(
+                        "player-message",
+                        "No se ha podido añadir el jugador: " + error.message,
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                players.push(data);
+
+                players.sort((a,b) => {
+
+                    const surname =
+                        a.apellidos.localeCompare(
+                            b.apellidos,
+                            "es"
+                        );
+
+                    if (surname !== 0) {
+                        return surname;
+                    }
+
+                    return a.nombre.localeCompare(
+                        b.nombre,
+                        "es"
+                    );
+
+                });
+
+
+                renderPlayers();
+                renderRateSelectors();
+
+                updateStats();
+
+                document
+                    .getElementById("player-form")
+                    .reset();
+
+
+                showMessage(
+                    "player-message",
+                    "Jugador añadido correctamente.",
+                    "success"
+                );
+
+            });
+
+    }
+
+
+    function renderPlayers() {
+
+        const container =
+            document.getElementById(
+                "players-list"
+            );
+
+        if (!players.length) {
+
+            container.innerHTML =
+                `<div class="empty">
+                    Todavía no hay jugadores.
+                    Utiliza el formulario para añadirlos.
+                </div>`;
+
+            return;
+        }
+
+
+        container.innerHTML =
+            players
+                .map(player => {
+
+                    return `
+                        <div class="player-item">
+
+                            <div class="player-info">
+
+                                <strong>
+                                    ${escapeHtml(player.nombre)}
+                                    ${escapeHtml(player.apellidos)}
+                                </strong>
+
+                                <small>
+                                    ${escapeHtml(player.posicion)}
+                                    · ${escapeHtml(player.lateralidad)}
+                                </small>
+
+                            </div>
+
+                            <span class="badge">
+                                ${escapeHtml(player.posicion)}
+                            </span>
+
+                        </div>
+                    `;
+
+                })
+                .join("");
+
+    }
+
+
+    /* =========================================================
+       VALORACIONES
+       ========================================================= */
+
+    function setupRating() {
+
+        document
+            .getElementById("rate-session")
+            .addEventListener(
+                "change",
+                updateRatingVisibility
+            );
+
+
+        document
+            .getElementById("rate-player")
+            .addEventListener(
+                "change",
+                updateRatingVisibility
+            );
+
+
+        document
+            .getElementById("save-rating-btn")
+            .addEventListener(
+                "click",
+                saveRating
+            );
+
+
+        document
+            .getElementById("clear-rating-btn")
+            .addEventListener(
+                "click",
+                clearRating
+            );
+
+    }
+
+
+    function renderRateSelectors() {
+
+        const sessionSelect =
+            document.getElementById(
+                "rate-session"
+            );
+
+        const playerSelect =
+            document.getElementById(
+                "rate-player"
+            );
+
+
+        const selectedSession =
+            sessionSelect.value;
+
+        const selectedPlayer =
+            playerSelect.value;
+
+
+        sessionSelect.innerHTML =
+            `<option value="">
+                Selecciona una sesión
+            </option>` +
+            sessions
+                .map(session => {
+
+                    const title =
+                        session.titulo ||
+                        session.tipo;
+
+                    return `
+                        <option value="${session.id}">
+                            ${formatDate(session.fecha)}
+                            · ${escapeHtml(title)}
+                        </option>
+                    `;
+
+                })
+                .join("");
+
+
+        playerSelect.innerHTML =
+            `<option value="">
+                Selecciona un jugador
+            </option>` +
+            players
+                .map(player => {
+
+                    return `
+                        <option value="${player.id}">
+                            ${escapeHtml(player.nombre)}
+                            ${escapeHtml(player.apellidos)}
+                            · ${escapeHtml(player.posicion)}
+                        </option>
+                    `;
+
+                })
+                .join("");
+
+
+        if (
+            sessions.some(
+                s => String(s.id) === selectedSession
+            )
+        ) {
+            sessionSelect.value =
+                selectedSession;
+        }
+
+
+        if (
+            players.some(
+                p => String(p.id) === selectedPlayer
+            )
+        ) {
+            playerSelect.value =
+                selectedPlayer;
+        }
+
+
+        updateRatingVisibility();
+
+    }
+
+
+    async function updateRatingVisibility() {
+
+        const sessionId =
+            document
+                .getElementById("rate-session")
+                .value;
+
+        const playerId =
+            document
+                .getElementById("rate-player")
+                .value;
+
+
+        const area =
+            document.getElementById(
+                "rating-area"
+            );
+
+        const empty =
+            document.getElementById(
+                "rate-empty"
+            );
+
+
+        if (!sessionId || !playerId) {
+
+            area.classList.add("hidden");
+            empty.classList.remove("hidden");
+
+            return;
+        }
+
+
+        const player =
+            players.find(
+                p => String(p.id) === playerId
+            );
+
+
+        if (!player) {
+            return;
+        }
+
+
+        area.classList.remove("hidden");
+        empty.classList.add("hidden");
+
+
+        document
+            .getElementById(
+                "selected-player-info"
+            )
+            .innerHTML = `
+                <div style="margin-bottom:20px;">
+
+                    <h3 style="margin-bottom:5px;">
+                        ${escapeHtml(player.nombre)}
+                        ${escapeHtml(player.apellidos)}
+                    </h3>
+
+                    <span class="badge">
+                        ${escapeHtml(player.posicion)}
+                    </span>
+
+                    <span class="badge">
+                        ${escapeHtml(player.lateralidad)}
+                    </span>
+
+                </div>
+            `;
+
+
+        await loadExistingRating(
+            Number(sessionId),
+            Number(playerId)
+        );
+
+
+        renderCriteria(
+            player.posicion === "Portero"
+        );
+
+    }
+
+
+    async function loadExistingRating(
+        sessionId,
+        playerId
+    ) {
+
+        currentRating = {};
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("valoraciones")
+            .select("*")
+            .eq("sesion_id", sessionId)
+            .eq("jugador_id", playerId)
+            .eq("entrenador_id", currentCoach.id)
+            .maybeSingle();
+
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+        }
+
+
+        if (!data) {
+
+            document
+                .getElementById(
+                    "rating-comment"
+                )
+                .value = "";
+
+            return;
+        }
+
+
+        currentRating = data;
+
+
+        document
+            .getElementById(
+                "rating-comment"
+            )
+            .value =
+                data.comentario || "";
+
+    }
+
+
+    function renderCriteria(isGoalkeeper) {
+
+        const container =
+            document.getElementById(
+                "criteria-container"
+            );
+
+
+        const visibleCriteria =
+            criteria.filter(c => {
+
+                if (c.key === "paradas") {
+                    return isGoalkeeper;
+                }
+
+                return true;
+
+            });
+
+
+        container.innerHTML =
+            visibleCriteria
+                .map(c => {
+
+                    const current =
+                        currentRating[c.key] ??
+                        "";
+
+
+                    return `
+                        <div class="criterion">
+
+                            <div class="criterion-title">
+                                ${escapeHtml(c.label)}
+                            </div>
+
+                            <div
+                                class="rating-buttons"
+                                data-criterion="${c.key}"
+                            >
+
+                                ${Array.from(
+                                    { length: 10 },
+                                    (_, index) => {
+
+                                        const value =
+                                            index + 1;
+
+                                        const selected =
+                                            Number(current) === value
+                                                ? "selected"
+                                                : "";
+
+                                        return `
+                                            <button
+                                                type="button"
+                                                class="rating-btn ${selected}"
+                                                data-value="${value}"
+                                                onclick="setRating('${c.key}', ${value})"
+                                            >
+                                                ${value}
+                                            </button>
+                                        `;
+
+                                    }
+                                ).join("")}
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="clear-rating"
+                                onclick="clearCriterion('${c.key}')"
+                            >
+                                Quitar valoración
+                            </button>
+
+                        </div>
+                    `;
+
+                })
+                .join("");
+
+    }
+
+
+    function setRating(
+        criterion,
+        value
+    ) {
+
+        currentRating[criterion] =
+            Number(value);
+
+
+        const buttons =
+            document.querySelectorAll(
+                `[data-criterion="${criterion}"] .rating-btn`
+            );
+
+
+        buttons.forEach(button => {
+
+            button.classList.toggle(
+                "selected",
+                Number(button.dataset.value) === value
+            );
+
+        });
+
+    }
+
+
+    function clearCriterion(
+        criterion
+    ) {
+
+        delete currentRating[criterion];
+
+        const buttons =
+            document.querySelectorAll(
+                `[data-criterion="${criterion}"] .rating-btn`
+            );
+
+        buttons.forEach(button => {
+            button.classList.remove("selected");
+        });
+
+    }
+
+
+    function clearRating() {
+
+        currentRating = {};
+
+        document
+            .getElementById(
+                "rating-comment"
+            )
+            .value = "";
+
+
+        const playerId =
+            document
+                .getElementById(
+                    "rate-player"
+                )
+                .value;
+
+
+        const player =
+            players.find(
+                p => String(p.id) === playerId
+            );
+
+
+        if (player) {
+
+            renderCriteria(
+                player.posicion === "Portero"
+            );
+
+        }
+
+    }
+
+
+    async function saveRating() {
+
+        const sessionId =
+            Number(
+                document
+                    .getElementById(
+                        "rate-session"
+                    )
+                    .value
+            );
+
+
+        const playerId =
+            Number(
+                document
+                    .getElementById(
+                        "rate-player"
+                    )
+                    .value
+            );
+
+
+        if (!sessionId || !playerId) {
+
+            showMessage(
+                "rating-message",
+                "Selecciona una sesión y un jugador.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const player =
+            players.find(
+                p => p.id === playerId
+            );
+
+
+        const payload = {
+
+            sesion_id: sessionId,
+
+            jugador_id: playerId,
+
+            entrenador_id: currentCoach.id,
+
+            control: null,
+            pase: null,
+            cabeceo: null,
+            golpeo: null,
+            regate: null,
+            posicionamiento: null,
+            decisiones: null,
+            trabajo_colectivo: null,
+            resistencia: null,
+            velocidad: null,
+            fuerza: null,
+            agilidad: null,
+            motivacion: null,
+            implicacion: null,
+            liderazgo: null,
+            paradas: null,
+
+            comentario:
+                document
+                    .getElementById(
+                        "rating-comment"
+                    )
+                    .value
+                    .trim() || null
+
+        };
+
+
+        const allowedCriteria =
+            criteria.filter(c => {
+
+                if (
+                    c.key === "paradas" &&
+                    player.posicion !== "Portero"
+                ) {
+                    return false;
+                }
+
+                return true;
+
+            });
+
+
+        allowedCriteria.forEach(c => {
+
+            if (
+                currentRating[c.key] !== undefined &&
+                currentRating[c.key] !== ""
+            ) {
+
+                payload[c.key] =
+                    Number(
+                        currentRating[c.key]
+                    );
+
+            }
+
+        });
+
+
+        const {
+            error
+        } = await supabaseClient
+            .from("valoraciones")
+            .upsert(
+                payload,
+                {
+                    onConflict:
+                        "sesion_id,jugador_id,entrenador_id"
+                }
+            );
+
+
+        if (error) {
+
+            console.error(error);
+
+            showMessage(
+                "rating-message",
+                "No se ha podido guardar la valoración: " + error.message,
+                "error"
+            );
+
+            return;
+        }
+
+
+        showMessage(
+            "rating-message",
+            "Valoración guardada correctamente.",
+            "success"
+        );
+
+
+        await updateStats();
+
+    }
+
+
+    /* =========================================================
+       RESUMEN
+       ========================================================= */
+
+    function renderSummarySessions() {
+
+        const select =
+            document.getElementById(
+                "summary-session"
+            );
+
+
+        const selected =
+            select.value;
+
+
+        select.innerHTML =
+            `<option value="">
+                Selecciona una sesión
+            </option>` +
+            sessions
+                .map(session => {
+
+                    const title =
+                        session.titulo ||
+                        session.tipo;
+
+                    return `
+                        <option value="${session.id}">
+                            ${formatDate(session.fecha)}
+                            · ${escapeHtml(title)}
+                        </option>
+                    `;
+
+                })
+                .join("");
+
+
+        if (
+            sessions.some(
+                s => String(s.id) === selected
+            )
+        ) {
+
+            select.value =
+                selected;
+
+        }
+
+
+        select.onchange =
+            renderSummary;
+
+    }
+
+
+    async function renderSummary() {
+
+        const sessionId =
+            document
+                .getElementById(
+                    "summary-session"
+                )
+                .value;
+
+
+        const container =
+            document.getElementById(
+                "summary-container"
+            );
+
+        const empty =
+            document.getElementById(
+                "summary-empty"
+            );
+
+
+        if (!sessionId) {
+
+            container.classList.add("hidden");
+            empty.classList.remove("hidden");
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("valoraciones")
+            .select(`
+                *,
+                jugadores (
+                    id,
+                    nombre,
+                    apellidos,
+                    posicion
+                ),
+                entrenadores (
+                    id,
+                    nombre
+                )
+            `)
+            .eq(
+                "sesion_id",
+                Number(sessionId)
+            );
+
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+
+        }
+
+
+        container.classList.remove("hidden");
+        empty.classList.add("hidden");
+
+
+        const tbody =
+            document.getElementById(
+                "summary-body"
+            );
+
+
+        tbody.innerHTML =
+            players
+                .map(player => {
+
+                    const playerRatings =
+                        data.filter(
+                            r =>
+                                r.jugador_id ===
+                                player.id
+                        );
+
+
+                    const values = {};
+
+
+                    playerRatings.forEach(r => {
+
+                        values[
+                            r.entrenadores.nombre
+                        ] = getOverallAverage(
+                            r,
+                            player.posicion
+                        );
+
+                    });
+
+
+                    const available =
+                        Object.values(values)
+                            .filter(
+                                v =>
+                                    v !== null
+                            );
+
+
+                    const overall =
+                        average(
+                            available
+                        );
+
+
+                    return `
+                        <tr>
+
+                            <td>
+                                ${escapeHtml(player.nombre)}
+                                ${escapeHtml(player.apellidos)}
+                            </td>
+
+                            <td>
+                                ${formatAverage(
+                                    values["Arkaitz"]
+                                )}
+                            </td>
+
+                            <td>
+                                ${formatAverage(
+                                    values["Aritz"]
+                                )}
+                            </td>
+
+                            <td>
+                                ${formatAverage(
+                                    values["Garikoitz"]
+                                )}
+                            </td>
+
+                            <td class="average">
+                                ${formatAverage(overall)}
+                            </td>
+
+                        </tr>
+                    `;
+
+                })
+                .join("");
+
+
+        renderSummaryDetail(
+            data
+        );
+
+    }
+
+
+    function renderSummaryDetail(data) {
+
+        const container =
+            document.getElementById(
+                "summary-detail"
+            );
+
+
+        if (!data.length) {
+
+            container.innerHTML =
+                `<div class="empty">
+                    Todavía no hay valoraciones para esta sesión.
+                </div>`;
+
+            return;
+
+        }
+
+
+        container.innerHTML = `
+            <div class="card" style="background:#f8fafc;">
+
+                <h3>
+                    Detalle por criterio
+                </h3>
+
+                <p style="color:#667085;">
+                    Media conjunta de los entrenadores que
+                    hayan valorado cada criterio.
+                </p>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Jugador</th>
+
+                                ${criteria
+                                    .map(c =>
+                                        `<th>
+                                            ${escapeHtml(c.label)}
+                                        </th>`
+                                    )
+                                    .join("")}
+
+                                <th>General</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${players
+                                .map(player => {
+
+                                    const ratings =
+                                        data.filter(
+                                            r =>
+                                                r.jugador_id ===
+                                                player.id
+                                        );
+
+                                    if (!ratings.length) {
+                                        return "";
+                                    }
+
+                                    return `
+                                        <tr>
+
+                                            <td>
+                                                ${escapeHtml(player.nombre)}
+                                                ${escapeHtml(player.apellidos)}
+                                            </td>
+
+                                            ${criteria
+                                                .map(c => {
+
+                                                    const vals =
+                                                        ratings
+                                                            .map(
+                                                                r =>
+                                                                    r[c.key]
+                                                            )
+                                                            .filter(
+                                                                v =>
+                                                                    v !== null &&
+                                                                    v !== undefined
+                                                            );
+
+                                                    return `
+                                                        <td>
+                                                            ${formatAverage(
+                                                                average(vals)
+                                                            )}
+                                                        </td>
+                                                    `;
+
+                                                })
+                                                .join("")}
+
+                                            <td class="average">
+                                                ${formatAverage(
+                                                    average(
+                                                        ratings
+                                                            .map(r =>
+                                                                getOverallAverage(
+                                                                    r,
+                                                                    player.posicion
+                                                                )
+                                                            )
+                                                            .filter(
+                                                                v =>
+                                                                    v !== null
+                                                            )
+                                                    )
+                                                )}
+                                            </td>
+
+                                        </tr>
+                                    `;
+
+                                })
+                                .join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+
+    function getOverallAverage(
+        rating,
+        position
+    ) {
+
+        const values =
+            criteria
+                .filter(c => {
+
+                    if (
+                        c.key === "paradas" &&
+                        position !== "Portero"
+                    ) {
+                        return false;
+                    }
+
+                    return true;
+
+                })
+                .map(c =>
+                    rating[c.key]
+                )
+                .filter(
+                    v =>
+                        v !== null &&
+                        v !== undefined
+                );
+
+
+        return average(values);
+
+    }
+
+
+    /* =========================================================
+       UTILIDADES
+       ========================================================= */
+
+    function average(values) {
+
+        if (!values || !values.length) {
+            return null;
+        }
+
+        const numbers =
+            values
+                .map(Number)
+                .filter(
+                    n =>
+                        !Number.isNaN(n)
+                );
+
+        if (!numbers.length) {
+            return null;
+        }
+
+        const total =
+            numbers.reduce(
+                (sum, value) =>
+                    sum + value,
+                0
+            );
+
+        return total / numbers.length;
+
+    }
+
+
+    function formatAverage(value) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            Number.isNaN(Number(value))
+        ) {
+            return "—";
+        }
+
+        return Number(value)
+            .toFixed(1);
+
+    }
+
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+            return "";
+        }
+
+        const parts =
+            dateString.split("-");
+
+        if (parts.length !== 3) {
+            return dateString;
+        }
+
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+    }
+
+
+    function showMessage(
+        elementId,
+        text,
+        type
+    ) {
+
+        const element =
+            document.getElementById(
+                elementId
+            );
+
+        element.textContent = text;
+
+        element.className =
+            `message ${type}`;
+
+        element.classList.remove(
+            "hidden"
+        );
+
+
+        setTimeout(() => {
+
+            element.classList.add(
+                "hidden"
+            );
+
+        }, 5000);
+
+    }
+
+
+    function escapeHtml(value) {
+
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* =========================================================
+       ESCUCHAR CAMBIOS DE SESIÓN
+       ========================================================= */
+
+    supabaseClient.auth.onAuthStateChange(
+        async (event, session) => {
+
+            if (
+                event === "SIGNED_IN" &&
+                session
+            ) {
+
+                await startApp(
+                    session.user
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
