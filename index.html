@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Lezkairu Alevín D</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -14,22 +15,22 @@
 
         :root {
             --azul: #123b68;
+            --azul2: #1d5b96;
             --azul-claro: #eaf2f9;
-            --azul-medio: #1d5b96;
             --verde: #16844a;
             --rojo: #c73b3b;
             --gris: #667085;
-            --gris-claro: #f4f6f8;
+            --fondo: #f4f6f8;
             --borde: #d9dee5;
             --blanco: #ffffff;
-            --negro: #182230;
+            --texto: #182230;
         }
 
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f8;
-            color: var(--negro);
+            background: var(--fondo);
+            color: var(--texto);
         }
 
         button,
@@ -47,13 +48,15 @@
             display: none !important;
         }
 
-        /* LOGIN */
+        /* =========================
+           LOGIN
+        ========================= */
 
         #login-screen {
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
             background: linear-gradient(135deg, #123b68, #1d5b96);
         }
@@ -64,63 +67,67 @@
             background: white;
             border-radius: 20px;
             padding: 35px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
+            box-shadow: 0 20px 50px rgba(0,0,0,.2);
         }
 
         .logo {
             width: 80px;
             height: 80px;
-            border-radius: 50%;
             margin: 0 auto 20px;
+            border-radius: 50%;
             background: var(--azul);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 30px;
             font-weight: bold;
         }
 
         .login-card h1 {
             text-align: center;
-            margin: 0;
             color: var(--azul);
+            margin: 0;
             font-size: 28px;
         }
 
-        .login-card .subtitle {
+        .subtitle {
             text-align: center;
             color: var(--gris);
             margin: 8px 0 30px;
         }
 
+        /* =========================
+           GENERAL
+        ========================= */
+
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 17px;
         }
 
         label {
             display: block;
             margin-bottom: 7px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         input,
         select,
         textarea {
             width: 100%;
+            padding: 12px 13px;
             border: 1px solid var(--borde);
             border-radius: 10px;
-            padding: 12px 13px;
             background: white;
-            color: var(--negro);
+            color: var(--texto);
             outline: none;
         }
 
         input:focus,
         select:focus,
         textarea:focus {
-            border-color: var(--azul-medio);
-            box-shadow: 0 0 0 3px rgba(29, 91, 150, 0.10);
+            border-color: var(--azul2);
+            box-shadow: 0 0 0 3px rgba(29,91,150,.1);
         }
 
         textarea {
@@ -133,11 +140,6 @@
             border-radius: 10px;
             padding: 12px 18px;
             font-weight: 700;
-            transition: 0.15s;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
         }
 
         .btn-primary {
@@ -153,11 +155,6 @@
         .btn-success {
             background: var(--verde);
             color: white;
-        }
-
-        .btn-danger {
-            background: #fbeaea;
-            color: var(--rojo);
         }
 
         .btn-full {
@@ -181,11 +178,9 @@
             color: #126438;
         }
 
-        /* APP */
-
-        #app {
-            min-height: 100vh;
-        }
+        /* =========================
+           CABECERA
+        ========================= */
 
         .topbar {
             background: var(--azul);
@@ -194,15 +189,15 @@
             position: sticky;
             top: 0;
             z-index: 20;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 10px rgba(0,0,0,.12);
         }
 
         .topbar-inner {
             max-width: 1200px;
             margin: auto;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             gap: 15px;
         }
 
@@ -219,8 +214,8 @@
             background: white;
             color: var(--azul);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             font-weight: bold;
         }
 
@@ -230,9 +225,7 @@
         }
 
         .brand small {
-            display: block;
-            opacity: 0.8;
-            margin-top: 2px;
+            opacity: .8;
         }
 
         .user-area {
@@ -241,17 +234,17 @@
             gap: 10px;
         }
 
-        .user-name {
-            font-weight: 700;
-        }
-
         .logout {
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,.4);
             background: transparent;
             color: white;
             border-radius: 8px;
             padding: 8px 12px;
         }
+
+        /* =========================
+           NAVEGACION
+        ========================= */
 
         .nav {
             background: white;
@@ -268,8 +261,8 @@
         .nav-btn {
             border: 0;
             background: transparent;
-            padding: 14px 17px;
             color: var(--gris);
+            padding: 14px 17px;
             white-space: nowrap;
             border-bottom: 3px solid transparent;
         }
@@ -279,6 +272,10 @@
             border-bottom-color: var(--azul);
             font-weight: 700;
         }
+
+        /* =========================
+           CONTENIDO
+        ========================= */
 
         .main {
             max-width: 1200px;
@@ -292,19 +289,12 @@
 
         .page-title h2 {
             margin: 0;
-            font-size: 28px;
             color: var(--azul);
+            font-size: 28px;
         }
 
         .page-title p {
             color: var(--gris);
-            margin: 6px 0 0;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
         }
 
         .card {
@@ -312,17 +302,18 @@
             border: 1px solid var(--borde);
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
         }
 
-        .card h3 {
-            margin-top: 0;
-            color: var(--azul);
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 18px;
         }
 
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -336,9 +327,9 @@
         }
 
         .stat-number {
+            color: var(--azul);
             font-size: 32px;
             font-weight: 800;
-            color: var(--azul);
         }
 
         .stat-label {
@@ -346,15 +337,21 @@
             margin-top: 5px;
         }
 
-        .player-list {
+        /* =========================
+           JUGADORES
+        ========================= */
+
+        .player-list,
+        .session-list {
             display: grid;
             gap: 10px;
         }
 
-        .player-item {
+        .player-item,
+        .session-item {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             gap: 15px;
             border: 1px solid var(--borde);
             border-radius: 12px;
@@ -362,11 +359,13 @@
             background: white;
         }
 
-        .player-info strong {
+        .player-info strong,
+        .session-info strong {
             display: block;
         }
 
-        .player-info small {
+        .player-info small,
+        .session-info small {
             color: var(--gris);
         }
 
@@ -378,21 +377,30 @@
             color: var(--azul);
             font-size: 12px;
             font-weight: 700;
+            margin-left: 4px;
         }
 
-        /* RATING */
+        /* =========================
+           VALORACIONES
+        ========================= */
 
         .session-box {
             background: var(--azul-claro);
             border: 1px solid #cbdceb;
-            padding: 18px;
             border-radius: 14px;
+            padding: 18px;
             margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 15px;
         }
 
         .criteria-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(2,1fr);
             gap: 12px;
         }
 
@@ -410,7 +418,7 @@
 
         .rating-buttons {
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
+            grid-template-columns: repeat(10,1fr);
             gap: 5px;
         }
 
@@ -423,10 +431,6 @@
             color: var(--gris);
         }
 
-        .rating-btn:hover {
-            border-color: var(--azul);
-        }
-
         .rating-btn.selected {
             background: var(--azul);
             color: white;
@@ -435,21 +439,23 @@
 
         .clear-rating {
             margin-top: 8px;
-            font-size: 12px;
-            color: var(--gris);
             border: 0;
             background: transparent;
+            color: var(--gris);
             padding: 0;
+            font-size: 12px;
         }
 
         .save-area {
-            margin-top: 20px;
             display: flex;
             justify-content: flex-end;
             gap: 10px;
+            margin-top: 20px;
         }
 
-        /* TABLE */
+        /* =========================
+           TABLAS
+        ========================= */
 
         .table-wrapper {
             overflow-x: auto;
@@ -478,8 +484,8 @@
             font-size: 13px;
         }
 
-        td:first-child,
-        th:first-child {
+        th:first-child,
+        td:first-child {
             text-align: left;
             position: sticky;
             left: 0;
@@ -491,68 +497,14 @@
         }
 
         .average {
-            font-weight: 800;
             font-size: 17px;
+            font-weight: 800;
         }
 
         .empty {
             text-align: center;
             color: var(--gris);
             padding: 30px;
-        }
-
-        .toolbar {
-            display: flex;
-            gap: 10px;
-            align-items: end;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .toolbar-item {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .toolbar-button {
-            min-width: 150px;
-        }
-
-        .session-list {
-            display: grid;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .session-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid var(--borde);
-            border-radius: 10px;
-            padding: 13px;
-        }
-
-        .session-item:hover {
-            background: var(--gris-claro);
-        }
-
-        .session-info strong {
-            display: block;
-        }
-
-        .session-info small {
-            color: var(--gris);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .full {
-            grid-column: 1 / -1;
         }
 
         .notice {
@@ -564,16 +516,8 @@
             margin-bottom: 15px;
         }
 
-        .success-box {
-            background: #eaf8f0;
-            border: 1px solid #bfe5cd;
-            color: #126438;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 15px;
-        }
+        @media(max-width:800px) {
 
-        @media (max-width: 800px) {
             .grid,
             .criteria-grid,
             .form-grid {
@@ -591,14 +535,6 @@
             .user-area {
                 flex-direction: column;
                 align-items: flex-end;
-            }
-
-            .user-name {
-                font-size: 13px;
-            }
-
-            .brand h1 {
-                font-size: 17px;
             }
 
             .main {
@@ -627,9 +563,9 @@
 
 <body>
 
-<!-- ========================================================= -->
-<!-- LOGIN -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
 
 <div id="login-screen">
 
@@ -638,12 +574,18 @@
         <div class="logo">LD</div>
 
         <h1>Lezkairu Alevín D</h1>
-        <div class="subtitle">Sistema de evaluación del equipo</div>
+
+        <div class="subtitle">
+            Sistema de evaluación del equipo
+        </div>
 
         <form id="login-form">
 
             <div class="form-group">
-                <label for="login-email">Correo electrónico</label>
+                <label for="login-email">
+                    Correo electrónico
+                </label>
+
                 <input
                     type="email"
                     id="login-email"
@@ -653,7 +595,10 @@
             </div>
 
             <div class="form-group">
-                <label for="login-password">Contraseña</label>
+                <label for="login-password">
+                    Contraseña
+                </label>
+
                 <input
                     type="password"
                     id="login-password"
@@ -662,22 +607,28 @@
                 >
             </div>
 
-            <button class="btn btn-primary btn-full" type="submit">
+            <button
+                type="submit"
+                class="btn btn-primary btn-full"
+            >
                 Entrar
             </button>
 
         </form>
 
-        <div id="login-message" class="message hidden"></div>
+        <div
+            id="login-message"
+            class="message hidden"
+        ></div>
 
     </div>
 
 </div>
 
 
-<!-- ========================================================= -->
-<!-- APP -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     APLICACION
+========================================================= -->
 
 <div id="app" class="hidden">
 
@@ -687,7 +638,9 @@
 
             <div class="brand">
 
-                <div class="brand-logo">LD</div>
+                <div class="brand-logo">
+                    LD
+                </div>
 
                 <div>
                     <h1>Lezkairu Alevín D</h1>
@@ -698,9 +651,15 @@
 
             <div class="user-area">
 
-                <span id="current-user-name" class="user-name"></span>
+                <span
+                    id="current-user-name"
+                    class="user-name"
+                ></span>
 
-                <button id="logout-btn" class="logout">
+                <button
+                    id="logout-btn"
+                    class="logout"
+                >
                     Salir
                 </button>
 
@@ -715,23 +674,38 @@
 
         <div class="nav-inner">
 
-            <button class="nav-btn active" data-page="home">
+            <button
+                class="nav-btn active"
+                data-page="home"
+            >
                 🏠 Inicio
             </button>
 
-            <button class="nav-btn" data-page="sessions">
+            <button
+                class="nav-btn"
+                data-page="sessions"
+            >
                 📅 Sesiones
             </button>
 
-            <button class="nav-btn" data-page="rate">
+            <button
+                class="nav-btn"
+                data-page="rate"
+            >
                 ⭐ Valorar
             </button>
 
-            <button class="nav-btn" data-page="summary">
+            <button
+                class="nav-btn"
+                data-page="summary"
+            >
                 📊 Resumen
             </button>
 
-            <button class="nav-btn" data-page="players">
+            <button
+                class="nav-btn"
+                data-page="players"
+            >
                 👥 Jugadores
             </button>
 
@@ -742,11 +716,14 @@
 
     <main class="main">
 
-        <!-- ================================================= -->
-        <!-- HOME -->
-        <!-- ================================================= -->
+        <!-- =================================================
+             INICIO
+        ================================================= -->
 
-        <section id="page-home" class="page">
+        <section
+            id="page-home"
+            class="page"
+        >
 
             <div class="page-title">
 
@@ -758,12 +735,14 @@
 
             </div>
 
-
             <div class="stat-grid">
 
                 <div class="stat">
 
-                    <div id="stat-players" class="stat-number">
+                    <div
+                        id="stat-players"
+                        class="stat-number"
+                    >
                         0
                     </div>
 
@@ -773,10 +752,12 @@
 
                 </div>
 
-
                 <div class="stat">
 
-                    <div id="stat-sessions" class="stat-number">
+                    <div
+                        id="stat-sessions"
+                        class="stat-number"
+                    >
                         0
                     </div>
 
@@ -786,10 +767,12 @@
 
                 </div>
 
-
                 <div class="stat">
 
-                    <div id="stat-ratings" class="stat-number">
+                    <div
+                        id="stat-ratings"
+                        class="stat-number"
+                    >
                         0
                     </div>
 
@@ -806,11 +789,11 @@
 
                 <div class="card">
 
-                    <h3>⚽ Nueva valoración</h3>
+                    <h3>⭐ Nueva valoración</h3>
 
                     <p>
-                        Selecciona una sesión y un jugador para valorar
-                        su rendimiento del 1 al 10.
+                        Valora a un jugador del 1 al 10
+                        en cada criterio.
                     </p>
 
                     <button
@@ -828,8 +811,8 @@
                     <h3>📊 Resumen del equipo</h3>
 
                     <p>
-                        Consulta las valoraciones realizadas por Arkaitz,
-                        Aritz y Garikoitz y sus medias.
+                        Consulta las valoraciones y medias
+                        de los tres entrenadores.
                     </p>
 
                     <button
@@ -846,19 +829,21 @@
         </section>
 
 
-        <!-- ================================================= -->
-        <!-- SESIONES -->
-        <!-- ================================================= -->
+        <!-- =================================================
+             SESIONES
+        ================================================= -->
 
-        <section id="page-sessions" class="page hidden">
+        <section
+            id="page-sessions"
+            class="page hidden"
+        >
 
             <div class="page-title">
 
-                <h2>Sesiones</h2>
+                <h2>📅 Sesiones</h2>
 
                 <p>
-                    Crea los entrenamientos y partidos que posteriormente
-                    se utilizarán para realizar las valoraciones.
+                    Crea los entrenamientos y partidos.
                 </p>
 
             </div>
@@ -866,7 +851,7 @@
 
             <div class="card">
 
-                <h3>➕ Crear nueva sesión</h3>
+                <h3>➕ Nueva sesión</h3>
 
                 <form id="session-form">
 
@@ -893,7 +878,10 @@
                                 Tipo
                             </label>
 
-                            <select id="session-type" required>
+                            <select
+                                id="session-type"
+                                required
+                            >
 
                                 <option value="Entrenamiento">
                                     Entrenamiento
@@ -908,61 +896,75 @@
                         </div>
 
 
-                        <div class="form-group full">
+                        <div
+                            class="form-group"
+                            style="grid-column:1/-1;"
+                        >
 
                             <label for="session-title">
-                                Nombre / descripción (opcional)
+                                Descripción (opcional)
                             </label>
 
                             <input
                                 type="text"
                                 id="session-title"
-                                placeholder="Ej. Entrenamiento técnico o Partido vs. XXX"
+                                placeholder="Ej. Partido contra..."
                             >
 
                         </div>
 
                     </div>
 
-
                     <button
-                        class="btn btn-primary"
                         type="submit"
+                        class="btn btn-primary"
                     >
                         Crear sesión
                     </button>
 
                 </form>
 
-                <div id="session-message" class="message hidden"></div>
+                <div
+                    id="session-message"
+                    class="message hidden"
+                ></div>
 
             </div>
 
 
-            <div class="card" style="margin-top:20px;">
+            <div
+                class="card"
+                style="margin-top:20px;"
+            >
 
-                <h3>📅 Sesiones existentes</h3>
+                <h3>Sesiones existentes</h3>
 
-                <div id="sessions-list" class="session-list"></div>
+                <div
+                    id="sessions-list"
+                    class="session-list"
+                ></div>
 
             </div>
 
         </section>
 
 
-        <!-- ================================================= -->
-        <!-- RATE -->
-        <!-- ================================================= -->
+        <!-- =================================================
+             VALORAR
+        ================================================= -->
 
-        <section id="page-rate" class="page hidden">
+        <section
+            id="page-rate"
+            class="page hidden"
+        >
 
             <div class="page-title">
 
                 <h2>⭐ Valorar jugador</h2>
 
                 <p>
-                    Las valoraciones no son obligatorias. Puedes dejar
-                    cualquier criterio sin puntuar.
+                    No es obligatorio puntuar todos los criterios.
+                    Los que dejes vacíos no entrarán en la media.
                 </p>
 
             </div>
@@ -979,9 +981,11 @@
                         </label>
 
                         <select id="rate-session">
+
                             <option value="">
                                 Selecciona una sesión
                             </option>
+
                         </select>
 
                     </div>
@@ -994,9 +998,11 @@
                         </label>
 
                         <select id="rate-player">
+
                             <option value="">
                                 Selecciona un jugador
                             </option>
+
                         </select>
 
                     </div>
@@ -1006,7 +1012,22 @@
             </div>
 
 
-            <div id="rating-area" class="hidden">
+            <div
+                id="rate-empty"
+                class="card"
+            >
+
+                <div class="empty">
+                    Selecciona una sesión y un jugador.
+                </div>
+
+            </div>
+
+
+            <div
+                id="rating-area"
+                class="hidden"
+            >
 
                 <div class="card">
 
@@ -1018,15 +1039,19 @@
                     ></div>
 
 
-                    <div class="form-group" style="margin-top:20px;">
+                    <div
+                        class="form-group"
+                        style="margin-top:20px;"
+                    >
 
                         <label for="rating-comment">
-                            Comentario del entrenador (opcional)
+                            Comentario del entrenador
+                            (opcional)
                         </label>
 
                         <textarea
                             id="rating-comment"
-                            placeholder="Observaciones sobre el rendimiento del jugador..."
+                            placeholder="Observaciones sobre el jugador..."
                         ></textarea>
 
                     </div>
@@ -1060,34 +1085,25 @@
 
             </div>
 
-
-            <div
-                id="rate-empty"
-                class="card"
-            >
-
-                <div class="empty">
-                    Selecciona una sesión y un jugador para comenzar.
-                </div>
-
-            </div>
-
         </section>
 
 
-        <!-- ================================================= -->
-        <!-- SUMMARY -->
-        <!-- ================================================= -->
+        <!-- =================================================
+             RESUMEN
+        ================================================= -->
 
-        <section id="page-summary" class="page hidden">
+        <section
+            id="page-summary"
+            class="page hidden"
+        >
 
             <div class="page-title">
 
                 <h2>📊 Resumen</h2>
 
                 <p>
-                    Comparación de las valoraciones realizadas por
-                    los tres entrenadores.
+                    Comparación de las valoraciones de los
+                    tres entrenadores.
                 </p>
 
             </div>
@@ -1095,24 +1111,28 @@
 
             <div class="card">
 
-                <div class="toolbar">
+                <div class="form-group">
 
-                    <div class="toolbar-item">
+                    <label for="summary-session">
+                        Sesión
+                    </label>
 
-                        <label for="summary-session">
-                            Sesión
-                        </label>
+                    <select id="summary-session">
 
-                        <select id="summary-session">
+                        <option value="">
+                            Selecciona una sesión
+                        </option>
 
-                            <option value="">
-                                Selecciona una sesión
-                            </option>
+                    </select>
 
-                        </select>
+                </div>
 
-                    </div>
 
+                <div
+                    id="summary-empty"
+                    class="empty"
+                >
+                    Selecciona una sesión.
                 </div>
 
 
@@ -1122,10 +1142,11 @@
                 >
 
                     <div class="notice">
-                        La media se calcula únicamente con las
-                        valoraciones existentes. Si un entrenador
-                        no ha valorado un jugador o criterio, no se
-                        considera como un 0.
+
+                        La media solo utiliza las valoraciones
+                        existentes. Una valoración que no se haya
+                        realizado no cuenta como un cero.
+
                     </div>
 
 
@@ -1161,33 +1182,28 @@
 
                 </div>
 
-
-                <div
-                    id="summary-empty"
-                    class="empty"
-                >
-                    Selecciona una sesión para ver el resumen.
-                </div>
-
             </div>
 
         </section>
 
 
-        <!-- ================================================= -->
-        <!-- PLAYERS -->
-        <!-- ================================================= -->
+        <!-- =================================================
+             JUGADORES
+        ================================================= -->
 
-        <section id="page-players" class="page hidden">
+        <section
+            id="page-players"
+            class="page hidden"
+        >
 
             <div class="page-title">
 
                 <h2>👥 Jugadores</h2>
 
                 <p>
-                    Añade y administra los jugadores del equipo.
-                    Actualmente la aplicación está preparada para
-                    ampliar la plantilla más allá de 14 jugadores.
+                    Añade los jugadores del equipo.
+                    Puedes añadir más adelante el jugador 15,
+                    16 o los que sean necesarios.
                 </p>
 
             </div>
@@ -1234,7 +1250,7 @@
                         <div class="form-group">
 
                             <label for="player-position">
-                                Posición
+                                Tipo de jugador
                             </label>
 
                             <select
@@ -1243,31 +1259,15 @@
                             >
 
                                 <option value="">
-                                    Selecciona posición
+                                    Selecciona
+                                </option>
+
+                                <option value="Jugador">
+                                    Jugador
                                 </option>
 
                                 <option value="Portero">
                                     Portero
-                                </option>
-
-                                <option value="Defensa">
-                                    Defensa
-                                </option>
-
-                                <option value="Lateral">
-                                    Lateral
-                                </option>
-
-                                <option value="Centrocampista">
-                                    Centrocampista
-                                </option>
-
-                                <option value="Extremo">
-                                    Extremo
-                                </option>
-
-                                <option value="Delantero">
-                                    Delantero
                                 </option>
 
                             </select>
@@ -1279,15 +1279,15 @@
 
                             <label for="player-foot">
                                 Pierna dominante
+                                <span style="font-weight:normal;color:#667085;">
+                                    (opcional)
+                                </span>
                             </label>
 
-                            <select
-                                id="player-foot"
-                                required
-                            >
+                            <select id="player-foot">
 
                                 <option value="">
-                                    Selecciona lateralidad
+                                    Todavía no lo sé
                                 </option>
 
                                 <option value="Diestro">
@@ -1308,13 +1308,14 @@
 
 
                         <button
-                            class="btn btn-primary"
                             type="submit"
+                            class="btn btn-primary"
                         >
                             Añadir jugador
                         </button>
 
                     </form>
+
 
                     <div
                         id="player-message"
@@ -1347,8 +1348,8 @@
 <script>
 
     /* =========================================================
-       CONFIGURACIÓN SUPABASE
-       ========================================================= */
+       SUPABASE
+    ========================================================= */
 
     const SUPABASE_URL =
         "https://tucuzbuprnyaytiqjfli.supabase.co";
@@ -1365,7 +1366,7 @@
 
     /* =========================================================
        VARIABLES
-       ========================================================= */
+    ========================================================= */
 
     let currentUser = null;
     let currentCoach = null;
@@ -1375,104 +1376,195 @@
     let currentRating = {};
 
     const criteria = [
-        { key: "control", label: "Control" },
-        { key: "pase", label: "Pase" },
-        { key: "cabeceo", label: "Cabeceo" },
-        { key: "golpeo", label: "Golpeo" },
-        { key: "regate", label: "Regate" },
-        { key: "posicionamiento", label: "Posicionamiento" },
-        { key: "decisiones", label: "Decisiones" },
-        { key: "trabajo_colectivo", label: "Trabajo colectivo" },
-        { key: "resistencia", label: "Resistencia" },
-        { key: "velocidad", label: "Velocidad" },
-        { key: "fuerza", label: "Fuerza" },
-        { key: "agilidad", label: "Agilidad" },
-        { key: "motivacion", label: "Motivación" },
-        { key: "implicacion", label: "Implicación" },
-        { key: "liderazgo", label: "Liderazgo" },
-        { key: "paradas", label: "Paradas" }
+
+        {
+            key: "control",
+            label: "Control"
+        },
+
+        {
+            key: "pase",
+            label: "Pase"
+        },
+
+        {
+            key: "cabeceo",
+            label: "Cabeceo"
+        },
+
+        {
+            key: "golpeo",
+            label: "Golpeo"
+        },
+
+        {
+            key: "regate",
+            label: "Regate"
+        },
+
+        {
+            key: "posicionamiento",
+            label: "Posicionamiento"
+        },
+
+        {
+            key: "decisiones",
+            label: "Decisiones"
+        },
+
+        {
+            key: "trabajo_colectivo",
+            label: "Trabajo colectivo"
+        },
+
+        {
+            key: "resistencia",
+            label: "Resistencia"
+        },
+
+        {
+            key: "velocidad",
+            label: "Velocidad"
+        },
+
+        {
+            key: "fuerza",
+            label: "Fuerza"
+        },
+
+        {
+            key: "agilidad",
+            label: "Agilidad"
+        },
+
+        {
+            key: "motivacion",
+            label: "Motivación"
+        },
+
+        {
+            key: "implicacion",
+            label: "Implicación"
+        },
+
+        {
+            key: "liderazgo",
+            label: "Liderazgo"
+        },
+
+        {
+            key: "paradas",
+            label: "Paradas"
+        }
+
     ];
 
 
     /* =========================================================
        INICIO
-       ========================================================= */
+    ========================================================= */
 
-    document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener(
+        "DOMContentLoaded",
+        async () => {
 
-        setTodayDate();
+            setTodayDate();
 
-        setupNavigation();
-        setupLogin();
-        setupLogout();
-        setupSessions();
-        setupPlayers();
-        setupRating();
+            setupNavigation();
+            setupLogin();
+            setupLogout();
+            setupSessions();
+            setupPlayers();
+            setupRating();
 
-        const {
-            data: {
-                session
+            const {
+                data: {
+                    session
+                }
+            } =
+                await supabaseClient
+                    .auth
+                    .getSession();
+
+            if (session) {
+
+                await startApp(
+                    session.user
+                );
+
             }
-        } = await supabaseClient.auth.getSession();
 
-        if (session) {
-            await startApp(session.user);
         }
-
-    });
+    );
 
 
     /* =========================================================
        LOGIN
-       ========================================================= */
+    ========================================================= */
 
     function setupLogin() {
 
         document
             .getElementById("login-form")
-            .addEventListener("submit", async (event) => {
+            .addEventListener(
+                "submit",
+                async event => {
 
-                event.preventDefault();
+                    event.preventDefault();
 
-                const email =
-                    document
-                        .getElementById("login-email")
-                        .value
-                        .trim();
+                    const email =
+                        document
+                            .getElementById(
+                                "login-email"
+                            )
+                            .value
+                            .trim();
 
-                const password =
-                    document
-                        .getElementById("login-password")
-                        .value;
+                    const password =
+                        document
+                            .getElementById(
+                                "login-password"
+                            )
+                            .value;
 
-                showMessage(
-                    "login-message",
-                    "Comprobando acceso...",
-                    "success"
-                );
-
-                const {
-                    data,
-                    error
-                } = await supabaseClient.auth.signInWithPassword({
-                    email,
-                    password
-                });
-
-                if (error) {
 
                     showMessage(
                         "login-message",
-                        "No se ha podido iniciar sesión. Comprueba el correo y la contraseña.",
-                        "error"
+                        "Comprobando acceso...",
+                        "success"
                     );
 
-                    return;
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .auth
+                            .signInWithPassword({
+                                email,
+                                password
+                            });
+
+
+                    if (error) {
+
+                        showMessage(
+                            "login-message",
+                            "No se ha podido iniciar sesión. Comprueba el correo y la contraseña.",
+                            "error"
+                        );
+
+                        return;
+                    }
+
+
+                    await startApp(
+                        data.user
+                    );
+
                 }
-
-                await startApp(data.user);
-
-            });
+            );
 
     }
 
@@ -1481,50 +1573,67 @@
 
         currentUser = user;
 
+
         const {
             data: coach,
             error
-        } = await supabaseClient
-            .from("entrenadores")
-            .select("*")
-            .eq("user_id", user.id)
-            .eq("activo", true)
-            .single();
+        } =
+            await supabaseClient
+                .from("entrenadores")
+                .select("*")
+                .eq("user_id", user.id)
+                .eq("activo", true)
+                .single();
+
 
         if (error || !coach) {
 
-            await supabaseClient.auth.signOut();
+            await supabaseClient
+                .auth
+                .signOut();
 
             document
                 .getElementById("login-screen")
-                .classList.remove("hidden");
+                .classList
+                .remove("hidden");
 
             document
                 .getElementById("app")
-                .classList.add("hidden");
+                .classList
+                .add("hidden");
 
             showMessage(
                 "login-message",
-                "La cuenta existe, pero no está vinculada a ningún entrenador.",
+                "La cuenta no está vinculada a ningún entrenador.",
                 "error"
             );
 
             return;
         }
 
+
         currentCoach = coach;
 
+
         document
-            .getElementById("current-user-name")
-            .textContent = coach.nombre;
+            .getElementById(
+                "current-user-name"
+            )
+            .textContent =
+                coach.nombre;
+
 
         document
             .getElementById("login-screen")
-            .classList.add("hidden");
+            .classList
+            .add("hidden");
+
 
         document
             .getElementById("app")
-            .classList.remove("hidden");
+            .classList
+            .remove("hidden");
+
 
         await loadAllData();
 
@@ -1534,36 +1643,43 @@
 
 
     /* =========================================================
-       LOGOUT
-       ========================================================= */
+       SALIR
+    ========================================================= */
 
     function setupLogout() {
 
         document
             .getElementById("logout-btn")
-            .addEventListener("click", async () => {
+            .addEventListener(
+                "click",
+                async () => {
 
-                await supabaseClient.auth.signOut();
+                    await supabaseClient
+                        .auth
+                        .signOut();
 
-                currentUser = null;
-                currentCoach = null;
+                    currentUser = null;
+                    currentCoach = null;
 
-                document
-                    .getElementById("app")
-                    .classList.add("hidden");
+                    document
+                        .getElementById("app")
+                        .classList
+                        .add("hidden");
 
-                document
-                    .getElementById("login-screen")
-                    .classList.remove("hidden");
+                    document
+                        .getElementById("login-screen")
+                        .classList
+                        .remove("hidden");
 
-            });
+                }
+            );
 
     }
 
 
     /* =========================================================
-       NAVEGACIÓN
-       ========================================================= */
+       NAVEGACION
+    ========================================================= */
 
     function setupNavigation() {
 
@@ -1571,13 +1687,16 @@
             .querySelectorAll(".nav-btn")
             .forEach(button => {
 
-                button.addEventListener("click", () => {
+                button.addEventListener(
+                    "click",
+                    () => {
 
-                    showPage(
-                        button.dataset.page
-                    );
+                        showPage(
+                            button.dataset.page
+                        );
 
-                });
+                    }
+                );
 
             });
 
@@ -1589,35 +1708,45 @@
         document
             .querySelectorAll(".page")
             .forEach(section => {
-                section.classList.add("hidden");
+
+                section
+                    .classList
+                    .add("hidden");
+
             });
+
 
         const selected =
             document.getElementById(
                 `page-${page}`
             );
 
+
         if (selected) {
-            selected.classList.remove("hidden");
+
+            selected
+                .classList
+                .remove("hidden");
+
         }
+
 
         document
             .querySelectorAll(".nav-btn")
             .forEach(button => {
 
-                button.classList.toggle(
-                    "active",
-                    button.dataset.page === page
-                );
+                button
+                    .classList
+                    .toggle(
+                        "active",
+                        button.dataset.page === page
+                    );
 
             });
 
-        if (page === "summary") {
-            renderSummarySessions();
-        }
 
-        if (page === "rate") {
-            renderRateSelectors();
+        if (page === "home") {
+            updateStats();
         }
 
         if (page === "players") {
@@ -1628,8 +1757,12 @@
             renderSessions();
         }
 
-        if (page === "home") {
-            updateStats();
+        if (page === "rate") {
+            renderRateSelectors();
+        }
+
+        if (page === "summary") {
+            renderSummarySessions();
         }
 
     }
@@ -1637,18 +1770,19 @@
 
     /* =========================================================
        CARGAR DATOS
-       ========================================================= */
+    ========================================================= */
 
     async function loadAllData() {
 
         await loadPlayers();
         await loadSessions();
-        await updateStats();
 
         renderPlayers();
         renderSessions();
         renderRateSelectors();
         renderSummarySessions();
+
+        await updateStats();
 
     }
 
@@ -1658,23 +1792,22 @@
         const {
             data,
             error
-        } = await supabaseClient
-            .from("jugadores")
-            .select("*")
-            .eq("activo", true)
-            .order("apellidos", {
-                ascending: true
-            })
-            .order("nombre", {
-                ascending: true
-            });
+        } =
+            await supabaseClient
+                .from("jugadores")
+                .select("*")
+                .eq("activo", true)
+                .order("apellidos")
+                .order("nombre");
+
 
         if (error) {
 
             console.error(error);
-
             return;
+
         }
+
 
         players = data || [];
 
@@ -1686,19 +1819,25 @@
         const {
             data,
             error
-        } = await supabaseClient
-            .from("sesiones")
-            .select("*")
-            .order("fecha", {
-                ascending: false
-            });
+        } =
+            await supabaseClient
+                .from("sesiones")
+                .select("*")
+                .order(
+                    "fecha",
+                    {
+                        ascending: false
+                    }
+                );
+
 
         if (error) {
 
             console.error(error);
-
             return;
+
         }
+
 
         sessions = data || [];
 
@@ -1706,40 +1845,55 @@
 
 
     /* =========================================================
-       ESTADÍSTICAS
-       ========================================================= */
+       ESTADISTICAS
+    ========================================================= */
 
     async function updateStats() {
 
         document
-            .getElementById("stat-players")
-            .textContent = players.length;
+            .getElementById(
+                "stat-players"
+            )
+            .textContent =
+                players.length;
+
 
         document
-            .getElementById("stat-sessions")
-            .textContent = sessions.length;
+            .getElementById(
+                "stat-sessions"
+            )
+            .textContent =
+                sessions.length;
 
 
         const {
             count,
             error
-        } = await supabaseClient
-            .from("valoraciones")
-            .select("*", {
-                count: "exact",
-                head: true
-            });
+        } =
+            await supabaseClient
+                .from("valoraciones")
+                .select(
+                    "*",
+                    {
+                        count: "exact",
+                        head: true
+                    }
+                );
+
 
         document
-            .getElementById("stat-ratings")
-            .textContent = error ? 0 : count;
+            .getElementById(
+                "stat-ratings"
+            )
+            .textContent =
+                error ? 0 : count;
 
     }
 
 
     /* =========================================================
        SESIONES
-       ========================================================= */
+    ========================================================= */
 
     function setTodayDate() {
 
@@ -1748,13 +1902,17 @@
                 .toISOString()
                 .split("T")[0];
 
+
         const input =
             document.getElementById(
                 "session-date"
             );
 
+
         if (input) {
+
             input.value = today;
+
         }
 
     }
@@ -1763,71 +1921,94 @@
     function setupSessions() {
 
         document
-            .getElementById("session-form")
-            .addEventListener("submit", async event => {
+            .getElementById(
+                "session-form"
+            )
+            .addEventListener(
+                "submit",
+                async event => {
 
-                event.preventDefault();
+                    event.preventDefault();
 
-                const fecha =
+
+                    const fecha =
+                        document
+                            .getElementById(
+                                "session-date"
+                            )
+                            .value;
+
+
+                    const tipo =
+                        document
+                            .getElementById(
+                                "session-type"
+                            )
+                            .value;
+
+
+                    const titulo =
+                        document
+                            .getElementById(
+                                "session-title"
+                            )
+                            .value
+                            .trim() || null;
+
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .from("sesiones")
+                            .insert({
+                                fecha,
+                                tipo,
+                                titulo
+                            })
+                            .select()
+                            .single();
+
+
+                    if (error) {
+
+                        showMessage(
+                            "session-message",
+                            "No se ha podido crear la sesión: " +
+                            error.message,
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    sessions.unshift(data);
+
+                    renderSessions();
+                    renderRateSelectors();
+                    renderSummarySessions();
+
                     document
-                        .getElementById("session-date")
-                        .value;
+                        .getElementById(
+                            "session-title"
+                        )
+                        .value = "";
 
-                const tipo =
-                    document
-                        .getElementById("session-type")
-                        .value;
-
-                const titulo =
-                    document
-                        .getElementById("session-title")
-                        .value
-                        .trim() || null;
-
-
-                const {
-                    data,
-                    error
-                } = await supabaseClient
-                    .from("sesiones")
-                    .insert({
-                        fecha,
-                        tipo,
-                        titulo
-                    })
-                    .select()
-                    .single();
-
-
-                if (error) {
 
                     showMessage(
                         "session-message",
-                        "No se ha podido crear la sesión: " + error.message,
-                        "error"
+                        "Sesión creada correctamente.",
+                        "success"
                     );
 
-                    return;
+
+                    updateStats();
+
                 }
-
-
-                sessions.unshift(data);
-
-                renderSessions();
-                renderRateSelectors();
-                renderSummarySessions();
-
-                showMessage(
-                    "session-message",
-                    "Sesión creada correctamente.",
-                    "success"
-                );
-
-                document
-                    .getElementById("session-title")
-                    .value = "";
-
-            });
+            );
 
     }
 
@@ -1839,14 +2020,16 @@
                 "sessions-list"
             );
 
+
         if (!sessions.length) {
 
             container.innerHTML =
                 `<div class="empty">
-                    Todavía no hay sesiones creadas.
+                    Todavía no hay sesiones.
                 </div>`;
 
             return;
+
         }
 
 
@@ -1857,6 +2040,7 @@
                     const title =
                         session.titulo ||
                         session.tipo;
+
 
                     return `
                         <div class="session-item">
@@ -1894,11 +2078,16 @@
 
         showPage("rate");
 
+
         setTimeout(() => {
 
             document
-                .getElementById("rate-session")
-                .value = String(id);
+                .getElementById(
+                    "rate-session"
+                )
+                .value =
+                    String(id);
+
 
             updateRatingVisibility();
 
@@ -1909,104 +2098,128 @@
 
     /* =========================================================
        JUGADORES
-       ========================================================= */
+    ========================================================= */
 
     function setupPlayers() {
 
         document
-            .getElementById("player-form")
-            .addEventListener("submit", async event => {
+            .getElementById(
+                "player-form"
+            )
+            .addEventListener(
+                "submit",
+                async event => {
 
-                event.preventDefault();
-
-                const jugador = {
-
-                    nombre:
-                        document
-                            .getElementById("player-name")
-                            .value
-                            .trim(),
-
-                    apellidos:
-                        document
-                            .getElementById("player-surname")
-                            .value
-                            .trim(),
-
-                    posicion:
-                        document
-                            .getElementById("player-position")
-                            .value,
-
-                    lateralidad:
-                        document
-                            .getElementById("player-foot")
-                            .value
-
-                };
+                    event.preventDefault();
 
 
-                const {
-                    data,
-                    error
-                } = await supabaseClient
-                    .from("jugadores")
-                    .insert(jugador)
-                    .select()
-                    .single();
+                    const jugador = {
+
+                        nombre:
+                            document
+                                .getElementById(
+                                    "player-name"
+                                )
+                                .value
+                                .trim(),
+
+                        apellidos:
+                            document
+                                .getElementById(
+                                    "player-surname"
+                                )
+                                .value
+                                .trim(),
+
+                        posicion:
+                            document
+                                .getElementById(
+                                    "player-position"
+                                )
+                                .value,
+
+                        lateralidad:
+                            document
+                                .getElementById(
+                                    "player-foot"
+                                )
+                                .value || null
+
+                    };
 
 
-                if (error) {
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .from("jugadores")
+                            .insert(jugador)
+                            .select()
+                            .single();
+
+
+                    if (error) {
+
+                        showMessage(
+                            "player-message",
+                            "No se ha podido añadir el jugador: " +
+                            error.message,
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    players.push(data);
+
+
+                    players.sort(
+                        (a,b) => {
+
+                            const apellidos =
+                                a.apellidos.localeCompare(
+                                    b.apellidos,
+                                    "es"
+                                );
+
+
+                            if (apellidos !== 0) {
+                                return apellidos;
+                            }
+
+
+                            return a.nombre.localeCompare(
+                                b.nombre,
+                                "es"
+                            );
+
+                        }
+                    );
+
+
+                    renderPlayers();
+                    renderRateSelectors();
+                    updateStats();
+
+
+                    document
+                        .getElementById(
+                            "player-form"
+                        )
+                        .reset();
+
 
                     showMessage(
                         "player-message",
-                        "No se ha podido añadir el jugador: " + error.message,
-                        "error"
+                        "Jugador añadido correctamente.",
+                        "success"
                     );
 
-                    return;
                 }
-
-
-                players.push(data);
-
-                players.sort((a,b) => {
-
-                    const surname =
-                        a.apellidos.localeCompare(
-                            b.apellidos,
-                            "es"
-                        );
-
-                    if (surname !== 0) {
-                        return surname;
-                    }
-
-                    return a.nombre.localeCompare(
-                        b.nombre,
-                        "es"
-                    );
-
-                });
-
-
-                renderPlayers();
-                renderRateSelectors();
-
-                updateStats();
-
-                document
-                    .getElementById("player-form")
-                    .reset();
-
-
-                showMessage(
-                    "player-message",
-                    "Jugador añadido correctamente.",
-                    "success"
-                );
-
-            });
+            );
 
     }
 
@@ -2018,21 +2231,27 @@
                 "players-list"
             );
 
+
         if (!players.length) {
 
             container.innerHTML =
                 `<div class="empty">
                     Todavía no hay jugadores.
-                    Utiliza el formulario para añadirlos.
                 </div>`;
 
             return;
+
         }
 
 
         container.innerHTML =
             players
                 .map(player => {
+
+                    const foot =
+                        player.lateralidad ||
+                        "Lateralidad pendiente";
+
 
                     return `
                         <div class="player-item">
@@ -2046,7 +2265,7 @@
 
                                 <small>
                                     ${escapeHtml(player.posicion)}
-                                    · ${escapeHtml(player.lateralidad)}
+                                    · ${escapeHtml(foot)}
                                 </small>
 
                             </div>
@@ -2066,12 +2285,14 @@
 
     /* =========================================================
        VALORACIONES
-       ========================================================= */
+    ========================================================= */
 
     function setupRating() {
 
         document
-            .getElementById("rate-session")
+            .getElementById(
+                "rate-session"
+            )
             .addEventListener(
                 "change",
                 updateRatingVisibility
@@ -2079,7 +2300,9 @@
 
 
         document
-            .getElementById("rate-player")
+            .getElementById(
+                "rate-player"
+            )
             .addEventListener(
                 "change",
                 updateRatingVisibility
@@ -2087,7 +2310,9 @@
 
 
         document
-            .getElementById("save-rating-btn")
+            .getElementById(
+                "save-rating-btn"
+            )
             .addEventListener(
                 "click",
                 saveRating
@@ -2095,7 +2320,9 @@
 
 
         document
-            .getElementById("clear-rating-btn")
+            .getElementById(
+                "clear-rating-btn"
+            )
             .addEventListener(
                 "click",
                 clearRating
@@ -2111,6 +2338,7 @@
                 "rate-session"
             );
 
+
         const playerSelect =
             document.getElementById(
                 "rate-player"
@@ -2119,6 +2347,7 @@
 
         const selectedSession =
             sessionSelect.value;
+
 
         const selectedPlayer =
             playerSelect.value;
@@ -2134,6 +2363,7 @@
                     const title =
                         session.titulo ||
                         session.tipo;
+
 
                     return `
                         <option value="${session.id}">
@@ -2167,21 +2397,29 @@
 
         if (
             sessions.some(
-                s => String(s.id) === selectedSession
+                s =>
+                    String(s.id) ===
+                    selectedSession
             )
         ) {
+
             sessionSelect.value =
                 selectedSession;
+
         }
 
 
         if (
             players.some(
-                p => String(p.id) === selectedPlayer
+                p =>
+                    String(p.id) ===
+                    selectedPlayer
             )
         ) {
+
             playerSelect.value =
                 selectedPlayer;
+
         }
 
 
@@ -2194,12 +2432,17 @@
 
         const sessionId =
             document
-                .getElementById("rate-session")
+                .getElementById(
+                    "rate-session"
+                )
                 .value;
+
 
         const playerId =
             document
-                .getElementById("rate-player")
+                .getElementById(
+                    "rate-player"
+                )
                 .value;
 
 
@@ -2207,6 +2450,7 @@
             document.getElementById(
                 "rating-area"
             );
+
 
         const empty =
             document.getElementById(
@@ -2220,12 +2464,15 @@
             empty.classList.remove("hidden");
 
             return;
+
         }
 
 
         const player =
             players.find(
-                p => String(p.id) === playerId
+                p =>
+                    String(p.id) ===
+                    playerId
             );
 
 
@@ -2243,9 +2490,10 @@
                 "selected-player-info"
             )
             .innerHTML = `
+
                 <div style="margin-bottom:20px;">
 
-                    <h3 style="margin-bottom:5px;">
+                    <h3 style="margin-bottom:7px;">
                         ${escapeHtml(player.nombre)}
                         ${escapeHtml(player.apellidos)}
                     </h3>
@@ -2255,7 +2503,10 @@
                     </span>
 
                     <span class="badge">
-                        ${escapeHtml(player.lateralidad)}
+                        ${escapeHtml(
+                            player.lateralidad ||
+                            "Lateralidad pendiente"
+                        )}
                     </span>
 
                 </div>
@@ -2286,20 +2537,30 @@
         const {
             data,
             error
-        } = await supabaseClient
-            .from("valoraciones")
-            .select("*")
-            .eq("sesion_id", sessionId)
-            .eq("jugador_id", playerId)
-            .eq("entrenador_id", currentCoach.id)
-            .maybeSingle();
+        } =
+            await supabaseClient
+                .from("valoraciones")
+                .select("*")
+                .eq(
+                    "sesion_id",
+                    sessionId
+                )
+                .eq(
+                    "jugador_id",
+                    playerId
+                )
+                .eq(
+                    "entrenador_id",
+                    currentCoach.id
+                )
+                .maybeSingle();
 
 
         if (error) {
 
             console.error(error);
-
             return;
+
         }
 
 
@@ -2312,6 +2573,7 @@
                 .value = "";
 
             return;
+
         }
 
 
@@ -2323,12 +2585,15 @@
                 "rating-comment"
             )
             .value =
-                data.comentario || "";
+                data.comentario ||
+                "";
 
     }
 
 
-    function renderCriteria(isGoalkeeper) {
+    function renderCriteria(
+        isGoalkeeper
+    ) {
 
         const container =
             document.getElementById(
@@ -2339,8 +2604,12 @@
         const visibleCriteria =
             criteria.filter(c => {
 
-                if (c.key === "paradas") {
+                if (
+                    c.key === "paradas"
+                ) {
+
                     return isGoalkeeper;
+
                 }
 
                 return true;
@@ -2358,6 +2627,7 @@
 
 
                     return `
+
                         <div class="criterion">
 
                             <div class="criterion-title">
@@ -2370,8 +2640,8 @@
                             >
 
                                 ${Array.from(
-                                    { length: 10 },
-                                    (_, index) => {
+                                    {length:10},
+                                    (_,index) => {
 
                                         const value =
                                             index + 1;
@@ -2382,20 +2652,23 @@
                                                 : "";
 
                                         return `
+
                                             <button
                                                 type="button"
                                                 class="rating-btn ${selected}"
                                                 data-value="${value}"
-                                                onclick="setRating('${c.key}', ${value})"
+                                                onclick="setRating('${c.key}',${value})"
                                             >
                                                 ${value}
                                             </button>
+
                                         `;
 
                                     }
                                 ).join("")}
 
                             </div>
+
 
                             <button
                                 type="button"
@@ -2406,6 +2679,7 @@
                             </button>
 
                         </div>
+
                     `;
 
                 })
@@ -2423,20 +2697,22 @@
             Number(value);
 
 
-        const buttons =
-            document.querySelectorAll(
+        document
+            .querySelectorAll(
                 `[data-criterion="${criterion}"] .rating-btn`
-            );
+            )
+            .forEach(button => {
 
+                button
+                    .classList
+                    .toggle(
+                        "selected",
+                        Number(
+                            button.dataset.value
+                        ) === value
+                    );
 
-        buttons.forEach(button => {
-
-            button.classList.toggle(
-                "selected",
-                Number(button.dataset.value) === value
-            );
-
-        });
+            });
 
     }
 
@@ -2447,14 +2723,18 @@
 
         delete currentRating[criterion];
 
-        const buttons =
-            document.querySelectorAll(
-                `[data-criterion="${criterion}"] .rating-btn`
-            );
 
-        buttons.forEach(button => {
-            button.classList.remove("selected");
-        });
+        document
+            .querySelectorAll(
+                `[data-criterion="${criterion}"] .rating-btn`
+            )
+            .forEach(button => {
+
+                button
+                    .classList
+                    .remove("selected");
+
+            });
 
     }
 
@@ -2462,6 +2742,7 @@
     function clearRating() {
 
         currentRating = {};
+
 
         document
             .getElementById(
@@ -2480,14 +2761,17 @@
 
         const player =
             players.find(
-                p => String(p.id) === playerId
+                p =>
+                    String(p.id) ===
+                    playerId
             );
 
 
         if (player) {
 
             renderCriteria(
-                player.posicion === "Portero"
+                player.posicion ===
+                "Portero"
             );
 
         }
@@ -2526,22 +2810,28 @@
             );
 
             return;
+
         }
 
 
         const player =
             players.find(
-                p => p.id === playerId
+                p =>
+                    p.id ===
+                    playerId
             );
 
 
         const payload = {
 
-            sesion_id: sessionId,
+            sesion_id:
+                sessionId,
 
-            jugador_id: playerId,
+            jugador_id:
+                playerId,
 
-            entrenador_id: currentCoach.id,
+            entrenador_id:
+                currentCoach.id,
 
             control: null,
             pase: null,
@@ -2566,31 +2856,28 @@
                         "rating-comment"
                     )
                     .value
-                    .trim() || null
+                    .trim() ||
+                null
 
         };
 
 
-        const allowedCriteria =
-            criteria.filter(c => {
-
-                if (
-                    c.key === "paradas" &&
-                    player.posicion !== "Portero"
-                ) {
-                    return false;
-                }
-
-                return true;
-
-            });
-
-
-        allowedCriteria.forEach(c => {
+        criteria.forEach(c => {
 
             if (
-                currentRating[c.key] !== undefined &&
-                currentRating[c.key] !== ""
+                c.key === "paradas" &&
+                player.posicion !==
+                    "Portero"
+            ) {
+                return;
+            }
+
+
+            if (
+                currentRating[c.key] !==
+                    undefined &&
+                currentRating[c.key] !==
+                    ""
             ) {
 
                 payload[c.key] =
@@ -2605,15 +2892,16 @@
 
         const {
             error
-        } = await supabaseClient
-            .from("valoraciones")
-            .upsert(
-                payload,
-                {
-                    onConflict:
-                        "sesion_id,jugador_id,entrenador_id"
-                }
-            );
+        } =
+            await supabaseClient
+                .from("valoraciones")
+                .upsert(
+                    payload,
+                    {
+                        onConflict:
+                            "sesion_id,jugador_id,entrenador_id"
+                    }
+                );
 
 
         if (error) {
@@ -2622,11 +2910,13 @@
 
             showMessage(
                 "rating-message",
-                "No se ha podido guardar la valoración: " + error.message,
+                "No se ha podido guardar la valoración: " +
+                error.message,
                 "error"
             );
 
             return;
+
         }
 
 
@@ -2644,7 +2934,7 @@
 
     /* =========================================================
        RESUMEN
-       ========================================================= */
+    ========================================================= */
 
     function renderSummarySessions() {
 
@@ -2669,6 +2959,7 @@
                         session.titulo ||
                         session.tipo;
 
+
                     return `
                         <option value="${session.id}">
                             ${formatDate(session.fecha)}
@@ -2682,7 +2973,9 @@
 
         if (
             sessions.some(
-                s => String(s.id) === selected
+                s =>
+                    String(s.id) ===
+                    selected
             )
         ) {
 
@@ -2713,6 +3006,7 @@
                 "summary-container"
             );
 
+
         const empty =
             document.getElementById(
                 "summary-empty"
@@ -2732,25 +3026,26 @@
         const {
             data,
             error
-        } = await supabaseClient
-            .from("valoraciones")
-            .select(`
-                *,
-                jugadores (
-                    id,
-                    nombre,
-                    apellidos,
-                    posicion
-                ),
-                entrenadores (
-                    id,
-                    nombre
-                )
-            `)
-            .eq(
-                "sesion_id",
-                Number(sessionId)
-            );
+        } =
+            await supabaseClient
+                .from("valoraciones")
+                .select(`
+                    *,
+                    jugadores (
+                        id,
+                        nombre,
+                        apellidos,
+                        posicion
+                    ),
+                    entrenadores (
+                        id,
+                        nombre
+                    )
+                `)
+                .eq(
+                    "sesion_id",
+                    Number(sessionId)
+                );
 
 
         if (error) {
@@ -2776,7 +3071,7 @@
             players
                 .map(player => {
 
-                    const playerRatings =
+                    const ratings =
                         data.filter(
                             r =>
                                 r.jugador_id ===
@@ -2787,14 +3082,15 @@
                     const values = {};
 
 
-                    playerRatings.forEach(r => {
+                    ratings.forEach(r => {
 
                         values[
                             r.entrenadores.nombre
-                        ] = getOverallAverage(
-                            r,
-                            player.posicion
-                        );
+                        ] =
+                            getOverallAverage(
+                                r,
+                                player.posicion
+                            );
 
                     });
 
@@ -2814,11 +3110,16 @@
 
 
                     return `
+
                         <tr>
 
                             <td>
-                                ${escapeHtml(player.nombre)}
-                                ${escapeHtml(player.apellidos)}
+                                ${escapeHtml(
+                                    player.nombre
+                                )}
+                                ${escapeHtml(
+                                    player.apellidos
+                                )}
                             </td>
 
                             <td>
@@ -2840,24 +3141,27 @@
                             </td>
 
                             <td class="average">
-                                ${formatAverage(overall)}
+                                ${formatAverage(
+                                    overall
+                                )}
                             </td>
 
                         </tr>
+
                     `;
 
                 })
                 .join("");
 
 
-        renderSummaryDetail(
-            data
-        );
+        renderSummaryDetail(data);
 
     }
 
 
-    function renderSummaryDetail(data) {
+    function renderSummaryDetail(
+        data
+    ) {
 
         const container =
             document.getElementById(
@@ -2869,7 +3173,7 @@
 
             container.innerHTML =
                 `<div class="empty">
-                    Todavía no hay valoraciones para esta sesión.
+                    Todavía no hay valoraciones.
                 </div>`;
 
             return;
@@ -2878,15 +3182,16 @@
 
 
         container.innerHTML = `
-            <div class="card" style="background:#f8fafc;">
+
+            <div class="card">
 
                 <h3>
                     Detalle por criterio
                 </h3>
 
                 <p style="color:#667085;">
-                    Media conjunta de los entrenadores que
-                    hayan valorado cada criterio.
+                    Media de los entrenadores que
+                    hayan puntuado cada criterio.
                 </p>
 
                 <div class="table-wrapper">
@@ -2902,7 +3207,9 @@
                                 ${criteria
                                     .map(c =>
                                         `<th>
-                                            ${escapeHtml(c.label)}
+                                            ${escapeHtml(
+                                                c.label
+                                            )}
                                         </th>`
                                     )
                                     .join("")}
@@ -2925,22 +3232,46 @@
                                                 player.id
                                         );
 
-                                    if (!ratings.length) {
+
+                                    if (
+                                        !ratings.length
+                                    ) {
                                         return "";
                                     }
 
+
                                     return `
+
                                         <tr>
 
                                             <td>
-                                                ${escapeHtml(player.nombre)}
-                                                ${escapeHtml(player.apellidos)}
+                                                ${escapeHtml(
+                                                    player.nombre
+                                                )}
+                                                ${escapeHtml(
+                                                    player.apellidos
+                                                )}
                                             </td>
+
 
                                             ${criteria
                                                 .map(c => {
 
-                                                    const vals =
+                                                    if (
+                                                        c.key ===
+                                                        "paradas" &&
+                                                        player.posicion !==
+                                                        "Portero"
+                                                    ) {
+
+                                                        return `
+                                                            <td>—</td>
+                                                        `;
+
+                                                    }
+
+
+                                                    const values =
                                                         ratings
                                                             .map(
                                                                 r =>
@@ -2952,10 +3283,13 @@
                                                                     v !== undefined
                                                             );
 
+
                                                     return `
                                                         <td>
                                                             ${formatAverage(
-                                                                average(vals)
+                                                                average(
+                                                                    values
+                                                                )
                                                             )}
                                                         </td>
                                                     `;
@@ -2963,15 +3297,17 @@
                                                 })
                                                 .join("")}
 
+
                                             <td class="average">
                                                 ${formatAverage(
                                                     average(
                                                         ratings
-                                                            .map(r =>
-                                                                getOverallAverage(
-                                                                    r,
-                                                                    player.posicion
-                                                                )
+                                                            .map(
+                                                                r =>
+                                                                    getOverallAverage(
+                                                                        r,
+                                                                        player.posicion
+                                                                    )
                                                             )
                                                             .filter(
                                                                 v =>
@@ -2982,6 +3318,7 @@
                                             </td>
 
                                         </tr>
+
                                     `;
 
                                 })
@@ -2994,6 +3331,7 @@
                 </div>
 
             </div>
+
         `;
 
     }
@@ -3012,7 +3350,9 @@
                         c.key === "paradas" &&
                         position !== "Portero"
                     ) {
+
                         return false;
+
                     }
 
                     return true;
@@ -3035,13 +3375,19 @@
 
     /* =========================================================
        UTILIDADES
-       ========================================================= */
+    ========================================================= */
 
     function average(values) {
 
-        if (!values || !values.length) {
+        if (
+            !values ||
+            !values.length
+        ) {
+
             return null;
+
         }
+
 
         const numbers =
             values
@@ -3051,18 +3397,22 @@
                         !Number.isNaN(n)
                 );
 
+
         if (!numbers.length) {
+
             return null;
+
         }
 
-        const total =
+
+        return (
             numbers.reduce(
-                (sum, value) =>
+                (sum,value) =>
                     sum + value,
                 0
-            );
-
-        return total / numbers.length;
+            ) /
+            numbers.length
+        );
 
     }
 
@@ -3072,10 +3422,15 @@
         if (
             value === null ||
             value === undefined ||
-            Number.isNaN(Number(value))
+            Number.isNaN(
+                Number(value)
+            )
         ) {
+
             return "—";
+
         }
+
 
         return Number(value)
             .toFixed(1);
@@ -3089,14 +3444,23 @@
             return "";
         }
 
+
         const parts =
             dateString.split("-");
+
 
         if (parts.length !== 3) {
             return dateString;
         }
 
-        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+        return (
+            parts[2] +
+            "/" +
+            parts[1] +
+            "/" +
+            parts[0]
+        );
 
     }
 
@@ -3112,63 +3476,78 @@
                 elementId
             );
 
-        element.textContent = text;
+
+        element.textContent =
+            text;
+
 
         element.className =
             `message ${type}`;
+
 
         element.classList.remove(
             "hidden"
         );
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            element.classList.add(
-                "hidden"
-            );
+                element.classList.add(
+                    "hidden"
+                );
 
-        }, 5000);
+            },
+            5000
+        );
 
     }
 
 
     function escapeHtml(value) {
 
-        if (value === null || value === undefined) {
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
             return "";
+
         }
 
+
         return String(value)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
+            .replaceAll("&","&amp;")
+            .replaceAll("<","&lt;")
+            .replaceAll(">","&gt;")
+            .replaceAll('"',"&quot;")
+            .replaceAll("'","&#039;");
 
     }
 
 
     /* =========================================================
-       ESCUCHAR CAMBIOS DE SESIÓN
-       ========================================================= */
+       CAMBIOS DE AUTENTICACION
+    ========================================================= */
 
-    supabaseClient.auth.onAuthStateChange(
-        async (event, session) => {
+    supabaseClient
+        .auth
+        .onAuthStateChange(
+            async (event, session) => {
 
-            if (
-                event === "SIGNED_IN" &&
-                session
-            ) {
+                if (
+                    event === "SIGNED_IN" &&
+                    session
+                ) {
 
-                await startApp(
-                    session.user
-                );
+                    await startApp(
+                        session.user
+                    );
+
+                }
 
             }
-
-        }
-    );
+        );
 
 </script>
 
