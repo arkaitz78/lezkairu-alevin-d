@@ -14,22 +14,28 @@
         }
 
         :root {
-            --azul: #123b68;
-            --azul2: #1d5b96;
-            --azul-claro: #eaf2f9;
-            --verde: #16844a;
-            --rojo: #c73b3b;
+            --azul: #123f70;
+            --azul-oscuro: #0d3157;
+            --azul-claro: #eaf2fa;
+            --azul-muy-claro: #f5f8fc;
+            --verde: #198754;
+            --rojo: #c0392b;
+            --naranja: #e67e22;
             --gris: #667085;
-            --fondo: #f4f6f8;
-            --borde: #d9dee5;
+            --gris-claro: #eef1f4;
+            --borde: #d7dde5;
+            --texto: #17202a;
             --blanco: #ffffff;
-            --texto: #182230;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: var(--fondo);
+            background: var(--azul-muy-claro);
             color: var(--texto);
         }
 
@@ -48,58 +54,63 @@
             display: none !important;
         }
 
-        /* =========================
+        /* =====================================================
            LOGIN
-        ========================= */
+        ===================================================== */
 
         #login-screen {
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             padding: 20px;
-            background: linear-gradient(135deg, #123b68, #1d5b96);
+            background: linear-gradient(
+                135deg,
+                #123f70,
+                #1f629c
+            );
         }
 
         .login-card {
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             background: white;
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 20px 50px rgba(0,0,0,.2);
+            border-radius: 22px;
+            padding: 38px;
+            box-shadow: 0 25px 60px rgba(0,0,0,.22);
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 82px;
+            height: 82px;
             border-radius: 50%;
-            background: var(--azul);
-            color: white;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            font-weight: bold;
+            background: var(--azul);
+            color: white;
+            font-size: 31px;
+            font-weight: 800;
         }
 
         .login-card h1 {
+            margin: 0;
             text-align: center;
             color: var(--azul);
-            margin: 0;
-            font-size: 28px;
+            font-size: 29px;
         }
 
         .subtitle {
+            margin: 8px 0 30px;
             text-align: center;
             color: var(--gris);
-            margin: 8px 0 30px;
+            font-size: 17px;
         }
 
-        /* =========================
-           GENERAL
-        ========================= */
+        /* =====================================================
+           FORMULARIOS
+        ===================================================== */
 
         .form-group {
             margin-bottom: 17px;
@@ -111,13 +122,19 @@
             font-weight: 700;
         }
 
+        .optional {
+            color: var(--gris);
+            font-weight: 400;
+            font-size: 13px;
+        }
+
         input,
         select,
         textarea {
             width: 100%;
-            padding: 12px 13px;
             border: 1px solid var(--borde);
             border-radius: 10px;
+            padding: 12px 13px;
             background: white;
             color: var(--texto);
             outline: none;
@@ -126,12 +143,12 @@
         input:focus,
         select:focus,
         textarea:focus {
-            border-color: var(--azul2);
-            box-shadow: 0 0 0 3px rgba(29,91,150,.1);
+            border-color: var(--azul);
+            box-shadow: 0 0 0 3px rgba(18,63,112,.10);
         }
 
         textarea {
-            min-height: 100px;
+            min-height: 110px;
             resize: vertical;
         }
 
@@ -147,6 +164,10 @@
             color: white;
         }
 
+        .btn-primary:hover {
+            background: var(--azul-oscuro);
+        }
+
         .btn-secondary {
             background: var(--azul-claro);
             color: var(--azul);
@@ -157,13 +178,23 @@
             color: white;
         }
 
+        .btn-danger {
+            background: #fdecea;
+            color: var(--rojo);
+        }
+
+        .btn-warning {
+            background: #fff3e5;
+            color: #a95d0b;
+        }
+
         .btn-full {
             width: 100%;
         }
 
         .message {
             margin-top: 15px;
-            padding: 12px;
+            padding: 12px 14px;
             border-radius: 10px;
             font-size: 14px;
         }
@@ -178,22 +209,22 @@
             color: #126438;
         }
 
-        /* =========================
+        /* =====================================================
            CABECERA
-        ========================= */
+        ===================================================== */
 
         .topbar {
-            background: var(--azul);
-            color: white;
-            padding: 14px 20px;
             position: sticky;
             top: 0;
-            z-index: 20;
-            box-shadow: 0 2px 10px rgba(0,0,0,.12);
+            z-index: 50;
+            background: var(--azul);
+            color: white;
+            padding: 13px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.15);
         }
 
         .topbar-inner {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
             display: flex;
             justify-content: space-between;
@@ -208,15 +239,15 @@
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: white;
-            color: var(--azul);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
+            background: white;
+            color: var(--azul);
+            font-weight: 800;
         }
 
         .brand h1 {
@@ -225,26 +256,26 @@
         }
 
         .brand small {
-            opacity: .8;
+            opacity: .82;
         }
 
         .user-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .logout {
-            border: 1px solid rgba(255,255,255,.4);
+            border: 1px solid rgba(255,255,255,.5);
             background: transparent;
             color: white;
             border-radius: 8px;
             padding: 8px 12px;
         }
 
-        /* =========================
+        /* =====================================================
            NAVEGACION
-        ========================= */
+        ===================================================== */
 
         .nav {
             background: white;
@@ -252,7 +283,7 @@
         }
 
         .nav-inner {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
             display: flex;
             overflow-x: auto;
@@ -260,11 +291,11 @@
 
         .nav-btn {
             border: 0;
+            border-bottom: 3px solid transparent;
             background: transparent;
             color: var(--gris);
             padding: 14px 17px;
             white-space: nowrap;
-            border-bottom: 3px solid transparent;
         }
 
         .nav-btn.active {
@@ -273,14 +304,14 @@
             font-weight: 700;
         }
 
-        /* =========================
+        /* =====================================================
            CONTENIDO
-        ========================= */
+        ===================================================== */
 
         .main {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
-            padding: 25px 18px 50px;
+            padding: 25px 18px 60px;
         }
 
         .page-title {
@@ -288,12 +319,13 @@
         }
 
         .page-title h2 {
-            margin: 0;
+            margin: 0 0 6px;
             color: var(--azul);
             font-size: 28px;
         }
 
         .page-title p {
+            margin: 0;
             color: var(--gris);
         }
 
@@ -302,18 +334,18 @@
             border: 1px solid var(--borde);
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.04);
+            box-shadow: 0 2px 8px rgba(0,0,0,.035);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 18px;
         }
 
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -328,18 +360,37 @@
 
         .stat-number {
             color: var(--azul);
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 800;
         }
 
         .stat-label {
-            color: var(--gris);
             margin-top: 5px;
+            color: var(--gris);
         }
 
-        /* =========================
+        .notice {
+            background: #fff7df;
+            border: 1px solid #ead9a2;
+            color: #765d11;
+            border-radius: 10px;
+            padding: 13px;
+            margin-bottom: 16px;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--gris);
+            padding: 30px 15px;
+        }
+
+        /* =====================================================
            JUGADORES
-        ========================= */
+        ===================================================== */
+
+        .search-box {
+            margin-bottom: 15px;
+        }
 
         .player-list,
         .session-list {
@@ -362,11 +413,26 @@
         .player-info strong,
         .session-info strong {
             display: block;
+            margin-bottom: 4px;
         }
 
         .player-info small,
         .session-info small {
             color: var(--gris);
+        }
+
+        .player-actions {
+            display: flex;
+            gap: 7px;
+            flex-shrink: 0;
+        }
+
+        .small-btn {
+            border: 0;
+            border-radius: 8px;
+            padding: 8px 11px;
+            font-size: 13px;
+            font-weight: 700;
         }
 
         .badge {
@@ -377,12 +443,27 @@
             color: var(--azul);
             font-size: 12px;
             font-weight: 700;
-            margin-left: 4px;
+            margin-right: 5px;
         }
 
-        /* =========================
+        .badge-pending {
+            background: #f2f3f5;
+            color: var(--gris);
+        }
+
+        /* =====================================================
+           SESIONES
+        ===================================================== */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* =====================================================
            VALORACIONES
-        ========================= */
+        ===================================================== */
 
         .session-box {
             background: var(--azul-claro);
@@ -392,58 +473,89 @@
             margin-bottom: 20px;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-            gap: 15px;
+        .selected-player {
+            background: var(--azul-muy-claro);
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .selected-player h3 {
+            margin: 0 0 7px;
+            color: var(--azul);
         }
 
         .criteria-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
         }
 
         .criterion {
             border: 1px solid var(--borde);
-            border-radius: 12px;
+            border-radius: 13px;
             padding: 15px;
             background: white;
         }
 
         .criterion-title {
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 12px;
         }
 
         .rating-buttons {
             display: grid;
-            grid-template-columns: repeat(10,1fr);
-            gap: 5px;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 6px;
         }
 
         .rating-btn {
-            border: 1px solid #ccd3dc;
+            min-height: 44px;
+            border: 1px solid #cbd3dc;
             background: white;
-            border-radius: 7px;
-            padding: 8px 2px;
-            font-weight: 700;
+            border-radius: 8px;
             color: var(--gris);
+            font-weight: 800;
+            transition: .12s;
+        }
+
+        .rating-btn:hover {
+            border-color: var(--azul);
         }
 
         .rating-btn.selected {
             background: var(--azul);
-            color: white;
             border-color: var(--azul);
+            color: white;
+            transform: translateY(-1px);
         }
 
         .clear-rating {
-            margin-top: 8px;
+            margin-top: 9px;
             border: 0;
             background: transparent;
-            color: var(--gris);
             padding: 0;
+            color: var(--gris);
             font-size: 12px;
+        }
+
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 13px;
+            background: var(--azul-claro);
+        }
+
+        .rating-summary-number {
+            color: var(--azul);
+            font-size: 32px;
+            font-weight: 800;
         }
 
         .save-area {
@@ -453,9 +565,9 @@
             margin-top: 20px;
         }
 
-        /* =========================
-           TABLAS
-        ========================= */
+        /* =====================================================
+           RESUMEN
+        ===================================================== */
 
         .table-wrapper {
             overflow-x: auto;
@@ -465,8 +577,8 @@
 
         table {
             width: 100%;
+            min-width: 900px;
             border-collapse: collapse;
-            min-width: 800px;
             background: white;
         }
 
@@ -497,30 +609,74 @@
         }
 
         .average {
+            color: var(--azul);
             font-size: 17px;
             font-weight: 800;
         }
 
-        .empty {
-            text-align: center;
-            color: var(--gris);
-            padding: 30px;
+        /* =====================================================
+           MODAL EDITAR JUGADOR
+        ===================================================== */
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        .notice {
-            background: #fff7df;
-            border: 1px solid #ead9a2;
-            color: #765d11;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 15px;
+        .modal {
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,.25);
         }
 
-        @media(max-width:800px) {
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--azul);
+        }
+
+        .modal-close {
+            border: 0;
+            background: var(--gris-claro);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width: 800px) {
 
             .grid,
-            .criteria-grid,
-            .form-grid {
+            .form-grid,
+            .criteria-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -535,18 +691,36 @@
             .user-area {
                 flex-direction: column;
                 align-items: flex-end;
+                gap: 5px;
+            }
+
+            .brand h1 {
+                font-size: 17px;
+            }
+
+            .brand small {
+                font-size: 11px;
             }
 
             .main {
-                padding: 18px 12px 40px;
+                padding: 18px 12px 45px;
             }
 
             .rating-buttons {
-                gap: 4px;
+                gap: 5px;
             }
 
             .rating-btn {
-                padding: 9px 0;
+                min-height: 48px;
+            }
+
+            .player-item,
+            .session-item {
+                align-items: flex-start;
+            }
+
+            .player-actions {
+                flex-direction: column;
             }
 
             .save-area {
@@ -557,15 +731,20 @@
                 width: 100%;
                 margin-top: 8px;
             }
+
+            .rating-summary {
+                display: block;
+                text-align: center;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<!-- =========================================================
+<!-- ============================================================
      LOGIN
-========================================================= -->
+============================================================ -->
 
 <div id="login-screen">
 
@@ -582,29 +761,33 @@
         <form id="login-form">
 
             <div class="form-group">
+
                 <label for="login-email">
                     Correo electrónico
                 </label>
 
                 <input
-                    type="email"
                     id="login-email"
+                    type="email"
                     placeholder="Introduce tu correo"
                     required
                 >
+
             </div>
 
             <div class="form-group">
+
                 <label for="login-password">
                     Contraseña
                 </label>
 
                 <input
-                    type="password"
                     id="login-password"
+                    type="password"
                     placeholder="Introduce tu contraseña"
                     required
                 >
+
             </div>
 
             <button
@@ -626,9 +809,9 @@
 </div>
 
 
-<!-- =========================================================
+<!-- ============================================================
      APLICACION
-========================================================= -->
+============================================================ -->
 
 <div id="app" class="hidden">
 
@@ -651,10 +834,7 @@
 
             <div class="user-area">
 
-                <span
-                    id="current-user-name"
-                    class="user-name"
-                ></span>
+                <span id="current-user-name"></span>
 
                 <button
                     id="logout-btn"
@@ -716,9 +896,9 @@
 
     <main class="main">
 
-        <!-- =================================================
+        <!-- ====================================================
              INICIO
-        ================================================= -->
+        ==================================================== -->
 
         <section
             id="page-home"
@@ -734,6 +914,7 @@
                 </p>
 
             </div>
+
 
             <div class="stat-grid">
 
@@ -752,6 +933,7 @@
 
                 </div>
 
+
                 <div class="stat">
 
                     <div
@@ -766,6 +948,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="stat">
 
@@ -792,8 +975,7 @@
                     <h3>⭐ Nueva valoración</h3>
 
                     <p>
-                        Valora a un jugador del 1 al 10
-                        en cada criterio.
+                        Valora a un jugador del 1 al 10.
                     </p>
 
                     <button
@@ -811,8 +993,8 @@
                     <h3>📊 Resumen del equipo</h3>
 
                     <p>
-                        Consulta las valoraciones y medias
-                        de los tres entrenadores.
+                        Consulta las valoraciones de los tres
+                        entrenadores y la media conjunta.
                     </p>
 
                     <button
@@ -829,9 +1011,9 @@
         </section>
 
 
-        <!-- =================================================
+        <!-- ====================================================
              SESIONES
-        ================================================= -->
+        ==================================================== -->
 
         <section
             id="page-sessions"
@@ -864,8 +1046,8 @@
                             </label>
 
                             <input
-                                type="date"
                                 id="session-date"
+                                type="date"
                                 required
                             >
 
@@ -902,18 +1084,22 @@
                         >
 
                             <label for="session-title">
-                                Descripción (opcional)
+                                Descripción
+                                <span class="optional">
+                                    (opcional)
+                                </span>
                             </label>
 
                             <input
-                                type="text"
                                 id="session-title"
-                                placeholder="Ej. Partido contra..."
+                                type="text"
+                                placeholder="Ej. Partido contra Osasuna"
                             >
 
                         </div>
 
                     </div>
+
 
                     <button
                         type="submit"
@@ -923,6 +1109,7 @@
                     </button>
 
                 </form>
+
 
                 <div
                     id="session-message"
@@ -949,9 +1136,9 @@
         </section>
 
 
-        <!-- =================================================
+        <!-- ====================================================
              VALORAR
-        ================================================= -->
+        ==================================================== -->
 
         <section
             id="page-rate"
@@ -963,8 +1150,8 @@
                 <h2>⭐ Valorar jugador</h2>
 
                 <p>
-                    No es obligatorio puntuar todos los criterios.
-                    Los que dejes vacíos no entrarán en la media.
+                    Puedes dejar cualquier criterio sin valorar.
+                    Los campos vacíos no entran en la media.
                 </p>
 
             </div>
@@ -1031,12 +1218,42 @@
 
                 <div class="card">
 
-                    <div id="selected-player-info"></div>
+                    <div
+                        id="selected-player-info"
+                        class="selected-player"
+                    ></div>
+
 
                     <div
                         id="criteria-container"
                         class="criteria-grid"
                     ></div>
+
+
+                    <div class="rating-summary">
+
+                        <div>
+
+                            <strong>
+                                Tu media en esta sesión
+                            </strong>
+
+                            <div
+                                style="color:#667085;font-size:13px;margin-top:4px;"
+                            >
+                                Solo cuenta los criterios puntuados.
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="personal-average"
+                            class="rating-summary-number"
+                        >
+                            —
+                        </div>
+
+                    </div>
 
 
                     <div
@@ -1046,7 +1263,9 @@
 
                         <label for="rating-comment">
                             Comentario del entrenador
-                            (opcional)
+                            <span class="optional">
+                                (opcional)
+                            </span>
                         </label>
 
                         <textarea
@@ -1088,9 +1307,9 @@
         </section>
 
 
-        <!-- =================================================
+        <!-- ====================================================
              RESUMEN
-        ================================================= -->
+        ==================================================== -->
 
         <section
             id="page-summary"
@@ -1102,8 +1321,8 @@
                 <h2>📊 Resumen</h2>
 
                 <p>
-                    Comparación de las valoraciones de los
-                    tres entrenadores.
+                    Comparación de las valoraciones de los tres
+                    entrenadores.
                 </p>
 
             </div>
@@ -1144,8 +1363,8 @@
                     <div class="notice">
 
                         La media solo utiliza las valoraciones
-                        existentes. Una valoración que no se haya
-                        realizado no cuenta como un cero.
+                        existentes. Un entrenador que no haya
+                        valorado no cuenta como un cero.
 
                     </div>
 
@@ -1187,9 +1406,9 @@
         </section>
 
 
-        <!-- =================================================
+        <!-- ====================================================
              JUGADORES
-        ================================================= -->
+        ==================================================== -->
 
         <section
             id="page-players"
@@ -1201,9 +1420,7 @@
                 <h2>👥 Jugadores</h2>
 
                 <p>
-                    Añade los jugadores del equipo.
-                    Puedes añadir más adelante el jugador 15,
-                    16 o los que sean necesarios.
+                    Añade y modifica la plantilla.
                 </p>
 
             </div>
@@ -1224,8 +1441,8 @@
                             </label>
 
                             <input
-                                type="text"
                                 id="player-name"
+                                type="text"
                                 required
                             >
 
@@ -1239,8 +1456,8 @@
                             </label>
 
                             <input
-                                type="text"
                                 id="player-surname"
+                                type="text"
                                 required
                             >
 
@@ -1279,7 +1496,7 @@
 
                             <label for="player-foot">
                                 Pierna dominante
-                                <span style="font-weight:normal;color:#667085;">
+                                <span class="optional">
                                     (opcional)
                                 </span>
                             </label>
@@ -1329,6 +1546,18 @@
 
                     <h3>📋 Plantilla</h3>
 
+
+                    <div class="search-box">
+
+                        <input
+                            id="player-search"
+                            type="search"
+                            placeholder="🔎 Buscar jugador..."
+                        >
+
+                    </div>
+
+
                     <div
                         id="players-list"
                         class="player-list"
@@ -1345,11 +1574,162 @@
 </div>
 
 
+<!-- ============================================================
+     MODAL EDITAR JUGADOR
+============================================================ -->
+
+<div
+    id="edit-modal"
+    class="modal-backdrop hidden"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h3>✏️ Editar jugador</h3>
+
+            <button
+                id="close-edit-modal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="edit-player-form">
+
+            <input
+                id="edit-player-id"
+                type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="edit-player-name">
+                    Nombre
+                </label>
+
+                <input
+                    id="edit-player-name"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="edit-player-surname">
+                    Apellidos
+                </label>
+
+                <input
+                    id="edit-player-surname"
+                    type="text"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="edit-player-position">
+                    Tipo de jugador
+                </label>
+
+                <select
+                    id="edit-player-position"
+                    required
+                >
+
+                    <option value="Jugador">
+                        Jugador
+                    </option>
+
+                    <option value="Portero">
+                        Portero
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="edit-player-foot">
+                    Pierna dominante
+                    <span class="optional">
+                        (opcional)
+                    </span>
+                </label>
+
+                <select id="edit-player-foot">
+
+                    <option value="">
+                        Todavía no lo sé
+                    </option>
+
+                    <option value="Diestro">
+                        Diestro
+                    </option>
+
+                    <option value="Zurdo">
+                        Zurdo
+                    </option>
+
+                    <option value="Ambidiestro">
+                        Ambidiestro
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancel-edit"
+                    class="btn btn-secondary"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Guardar cambios
+                </button>
+
+            </div>
+
+
+            <div
+                id="edit-player-message"
+                class="message hidden"
+            ></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
 <script>
 
-    /* =========================================================
+    /* ============================================================
        SUPABASE
-    ========================================================= */
+    ============================================================ */
 
     const SUPABASE_URL =
         "https://tucuzbuprnyaytiqjfli.supabase.co";
@@ -1364,16 +1744,26 @@
         );
 
 
-    /* =========================================================
+    /* ============================================================
        VARIABLES
-    ========================================================= */
+    ============================================================ */
 
     let currentUser = null;
+
     let currentCoach = null;
 
     let players = [];
+
     let sessions = [];
+
     let currentRating = {};
+
+    let playerSearchText = "";
+
+
+    /* ============================================================
+       CRITERIOS
+    ============================================================ */
 
     const criteria = [
 
@@ -1460,9 +1850,9 @@
     ];
 
 
-    /* =========================================================
+    /* ============================================================
        INICIO
-    ========================================================= */
+    ============================================================ */
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -1471,11 +1861,18 @@
             setTodayDate();
 
             setupNavigation();
+
             setupLogin();
+
             setupLogout();
+
             setupSessions();
+
             setupPlayers();
+
             setupRating();
+
+            setupEditModal();
 
             const {
                 data: {
@@ -1485,6 +1882,7 @@
                 await supabaseClient
                     .auth
                     .getSession();
+
 
             if (session) {
 
@@ -1498,9 +1896,9 @@
     );
 
 
-    /* =========================================================
+    /* ============================================================
        LOGIN
-    ========================================================= */
+    ============================================================ */
 
     function setupLogin() {
 
@@ -1512,6 +1910,7 @@
 
                     event.preventDefault();
 
+
                     const email =
                         document
                             .getElementById(
@@ -1519,6 +1918,7 @@
                             )
                             .value
                             .trim();
+
 
                     const password =
                         document
@@ -1556,6 +1956,7 @@
                         );
 
                         return;
+
                     }
 
 
@@ -1581,26 +1982,42 @@
             await supabaseClient
                 .from("entrenadores")
                 .select("*")
-                .eq("user_id", user.id)
-                .eq("activo", true)
+                .eq(
+                    "user_id",
+                    user.id
+                )
+                .eq(
+                    "activo",
+                    true
+                )
                 .single();
 
 
-        if (error || !coach) {
+        if (
+            error ||
+            !coach
+        ) {
 
             await supabaseClient
                 .auth
                 .signOut();
 
+
             document
-                .getElementById("login-screen")
+                .getElementById(
+                    "login-screen"
+                )
                 .classList
                 .remove("hidden");
 
+
             document
-                .getElementById("app")
+                .getElementById(
+                    "app"
+                )
                 .classList
                 .add("hidden");
+
 
             showMessage(
                 "login-message",
@@ -1608,7 +2025,9 @@
                 "error"
             );
 
+
             return;
+
         }
 
 
@@ -1624,32 +2043,39 @@
 
 
         document
-            .getElementById("login-screen")
+            .getElementById(
+                "login-screen"
+            )
             .classList
             .add("hidden");
 
 
         document
-            .getElementById("app")
+            .getElementById(
+                "app"
+            )
             .classList
             .remove("hidden");
 
 
         await loadAllData();
 
+
         showPage("home");
 
     }
 
 
-    /* =========================================================
-       SALIR
-    ========================================================= */
+    /* ============================================================
+       LOGOUT
+    ============================================================ */
 
     function setupLogout() {
 
         document
-            .getElementById("logout-btn")
+            .getElementById(
+                "logout-btn"
+            )
             .addEventListener(
                 "click",
                 async () => {
@@ -1658,16 +2084,24 @@
                         .auth
                         .signOut();
 
+
                     currentUser = null;
+
                     currentCoach = null;
 
+
                     document
-                        .getElementById("app")
+                        .getElementById(
+                            "app"
+                        )
                         .classList
                         .add("hidden");
 
+
                     document
-                        .getElementById("login-screen")
+                        .getElementById(
+                            "login-screen"
+                        )
                         .classList
                         .remove("hidden");
 
@@ -1677,9 +2111,9 @@
     }
 
 
-    /* =========================================================
+    /* ============================================================
        NAVEGACION
-    ========================================================= */
+    ============================================================ */
 
     function setupNavigation() {
 
@@ -1718,7 +2152,7 @@
 
         const selected =
             document.getElementById(
-                `page-${page}`
+                "page-" + page
             );
 
 
@@ -1768,18 +2202,22 @@
     }
 
 
-    /* =========================================================
-       CARGAR DATOS
-    ========================================================= */
+    /* ============================================================
+       CARGA GENERAL
+    ============================================================ */
 
     async function loadAllData() {
 
         await loadPlayers();
+
         await loadSessions();
 
         renderPlayers();
+
         renderSessions();
+
         renderRateSelectors();
+
         renderSummarySessions();
 
         await updateStats();
@@ -1796,20 +2234,35 @@
             await supabaseClient
                 .from("jugadores")
                 .select("*")
-                .eq("activo", true)
-                .order("apellidos")
-                .order("nombre");
+                .eq(
+                    "activo",
+                    true
+                )
+                .order(
+                    "apellidos",
+                    {
+                        ascending: true
+                    }
+                )
+                .order(
+                    "nombre",
+                    {
+                        ascending: true
+                    }
+                );
 
 
         if (error) {
 
             console.error(error);
+
             return;
 
         }
 
 
-        players = data || [];
+        players =
+            data || [];
 
     }
 
@@ -1834,19 +2287,21 @@
         if (error) {
 
             console.error(error);
+
             return;
 
         }
 
 
-        sessions = data || [];
+        sessions =
+            data || [];
 
     }
 
 
-    /* =========================================================
+    /* ============================================================
        ESTADISTICAS
-    ========================================================= */
+    ============================================================ */
 
     async function updateStats() {
 
@@ -1886,14 +2341,16 @@
                 "stat-ratings"
             )
             .textContent =
-                error ? 0 : count;
+                error
+                    ? 0
+                    : count;
 
     }
 
 
-    /* =========================================================
+    /* ============================================================
        SESIONES
-    ========================================================= */
+    ============================================================ */
 
     function setTodayDate() {
 
@@ -1911,7 +2368,8 @@
 
         if (input) {
 
-            input.value = today;
+            input.value =
+                today;
 
         }
 
@@ -1953,7 +2411,8 @@
                                 "session-title"
                             )
                             .value
-                            .trim() || null;
+                            .trim() ||
+                        null;
 
 
                     const {
@@ -1985,17 +2444,24 @@
                     }
 
 
-                    sessions.unshift(data);
+                    sessions.unshift(
+                        data
+                    );
+
 
                     renderSessions();
+
                     renderRateSelectors();
+
                     renderSummarySessions();
+
 
                     document
                         .getElementById(
                             "session-title"
                         )
-                        .value = "";
+                        .value =
+                            "";
 
 
                     showMessage(
@@ -2024,9 +2490,11 @@
         if (!sessions.length) {
 
             container.innerHTML =
-                `<div class="empty">
+                `
+                <div class="empty">
                     Todavía no hay sesiones.
-                </div>`;
+                </div>
+                `;
 
             return;
 
@@ -2035,40 +2503,43 @@
 
         container.innerHTML =
             sessions
-                .map(session => {
+                .map(
+                    session => {
 
-                    const title =
-                        session.titulo ||
-                        session.tipo;
+                        const title =
+                            session.titulo ||
+                            session.tipo;
 
 
-                    return `
-                        <div class="session-item">
+                        return `
+                            <div class="session-item">
 
-                            <div class="session-info">
+                                <div class="session-info">
 
-                                <strong>
-                                    ${escapeHtml(title)}
-                                </strong>
+                                    <strong>
+                                        ${escapeHtml(title)}
+                                    </strong>
 
-                                <small>
-                                    ${formatDate(session.fecha)}
-                                    · ${escapeHtml(session.tipo)}
-                                </small>
+                                    <small>
+                                        ${formatDate(session.fecha)}
+                                        ·
+                                        ${escapeHtml(session.tipo)}
+                                    </small>
+
+                                </div>
+
+                                <button
+                                    class="small-btn btn-secondary"
+                                    onclick="selectSessionForRating(${session.id})"
+                                >
+                                    ⭐ Valorar
+                                </button>
 
                             </div>
+                        `;
 
-                            <button
-                                class="btn btn-secondary"
-                                onclick="selectSessionForRating(${session.id})"
-                            >
-                                Valorar
-                            </button>
-
-                        </div>
-                    `;
-
-                })
+                    }
+                )
                 .join("");
 
     }
@@ -2079,26 +2550,29 @@
         showPage("rate");
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            document
-                .getElementById(
-                    "rate-session"
-                )
-                .value =
-                    String(id);
+                document
+                    .getElementById(
+                        "rate-session"
+                    )
+                    .value =
+                        String(id);
 
 
-            updateRatingVisibility();
+                updateRatingVisibility();
 
-        }, 50);
+            },
+            50
+        );
 
     }
 
 
-    /* =========================================================
+    /* ============================================================
        JUGADORES
-    ========================================================= */
+    ============================================================ */
 
     function setupPlayers() {
 
@@ -2143,7 +2617,8 @@
                                 .getElementById(
                                     "player-foot"
                                 )
-                                .value || null
+                                .value ||
+                            null
 
                     };
 
@@ -2173,35 +2648,18 @@
                     }
 
 
-                    players.push(data);
-
-
-                    players.sort(
-                        (a,b) => {
-
-                            const apellidos =
-                                a.apellidos.localeCompare(
-                                    b.apellidos,
-                                    "es"
-                                );
-
-
-                            if (apellidos !== 0) {
-                                return apellidos;
-                            }
-
-
-                            return a.nombre.localeCompare(
-                                b.nombre,
-                                "es"
-                            );
-
-                        }
+                    players.push(
+                        data
                     );
 
 
+                    sortPlayers();
+
+
                     renderPlayers();
+
                     renderRateSelectors();
+
                     updateStats();
 
 
@@ -2221,6 +2679,56 @@
                 }
             );
 
+
+        document
+            .getElementById(
+                "player-search"
+            )
+            .addEventListener(
+                "input",
+                event => {
+
+                    playerSearchText =
+                        event.target.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    renderPlayers();
+
+                }
+            );
+
+    }
+
+
+    function sortPlayers() {
+
+        players.sort(
+            (a,b) => {
+
+                const surname =
+                    a.apellidos.localeCompare(
+                        b.apellidos,
+                        "es"
+                    );
+
+
+                if (surname !== 0) {
+
+                    return surname;
+
+                }
+
+
+                return a.nombre.localeCompare(
+                    b.nombre,
+                    "es"
+                );
+
+            }
+        );
+
     }
 
 
@@ -2232,12 +2740,49 @@
             );
 
 
-        if (!players.length) {
+        let visiblePlayers =
+            players;
+
+
+        if (playerSearchText) {
+
+            visiblePlayers =
+                players.filter(
+                    player => {
+
+                        const text =
+                            (
+                                player.nombre +
+                                " " +
+                                player.apellidos +
+                                " " +
+                                player.posicion
+                            )
+                            .toLowerCase();
+
+
+                        return text.includes(
+                            playerSearchText
+                        );
+
+                    }
+                );
+
+        }
+
+
+        if (!visiblePlayers.length) {
 
             container.innerHTML =
-                `<div class="empty">
-                    Todavía no hay jugadores.
-                </div>`;
+                `
+                <div class="empty">
+                    ${
+                        players.length
+                            ? "No se han encontrado jugadores."
+                            : "Todavía no hay jugadores."
+                    }
+                </div>
+                `;
 
             return;
 
@@ -2245,47 +2790,341 @@
 
 
         container.innerHTML =
-            players
-                .map(player => {
+            visiblePlayers
+                .map(
+                    player => {
 
-                    const foot =
-                        player.lateralidad ||
-                        "Lateralidad pendiente";
+                        const foot =
+                            player.lateralidad ||
+                            "Lateralidad pendiente";
 
 
-                    return `
-                        <div class="player-item">
+                        const footClass =
+                            player.lateralidad
+                                ? "badge"
+                                : "badge badge-pending";
 
-                            <div class="player-info">
 
-                                <strong>
-                                    ${escapeHtml(player.nombre)}
-                                    ${escapeHtml(player.apellidos)}
-                                </strong>
+                        return `
+                            <div class="player-item">
 
-                                <small>
-                                    ${escapeHtml(player.posicion)}
-                                    · ${escapeHtml(foot)}
-                                </small>
+                                <div class="player-info">
+
+                                    <strong>
+                                        ${escapeHtml(
+                                            player.nombre
+                                        )}
+                                        ${escapeHtml(
+                                            player.apellidos
+                                        )}
+                                    </strong>
+
+                                    <small>
+
+                                        <span class="badge">
+                                            ${escapeHtml(
+                                                player.posicion
+                                            )}
+                                        </span>
+
+                                        <span class="${footClass}">
+                                            ${escapeHtml(
+                                                foot
+                                            )}
+                                        </span>
+
+                                    </small>
+
+                                </div>
+
+
+                                <div class="player-actions">
+
+                                    <button
+                                        class="small-btn btn-secondary"
+                                        onclick="openEditPlayer(${player.id})"
+                                    >
+                                        ✏️ Editar
+                                    </button>
+
+                                </div>
 
                             </div>
+                        `;
 
-                            <span class="badge">
-                                ${escapeHtml(player.posicion)}
-                            </span>
-
-                        </div>
-                    `;
-
-                })
+                    }
+                )
                 .join("");
 
     }
 
 
-    /* =========================================================
+    /* ============================================================
+       EDITAR JUGADOR
+    ============================================================ */
+
+    function setupEditModal() {
+
+        document
+            .getElementById(
+                "close-edit-modal"
+            )
+            .addEventListener(
+                "click",
+                closeEditPlayer
+            );
+
+
+        document
+            .getElementById(
+                "cancel-edit"
+            )
+            .addEventListener(
+                "click",
+                closeEditPlayer
+            );
+
+
+        document
+            .getElementById(
+                "edit-player-form"
+            )
+            .addEventListener(
+                "submit",
+                saveEditedPlayer
+            );
+
+
+        document
+            .getElementById(
+                "edit-modal"
+            )
+            .addEventListener(
+                "click",
+                event => {
+
+                    if (
+                        event.target.id ===
+                        "edit-modal"
+                    ) {
+
+                        closeEditPlayer();
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    function openEditPlayer(id) {
+
+        const player =
+            players.find(
+                p =>
+                    Number(p.id) ===
+                    Number(id)
+            );
+
+
+        if (!player) {
+
+            return;
+
+        }
+
+
+        document
+            .getElementById(
+                "edit-player-id"
+            )
+            .value =
+                player.id;
+
+
+        document
+            .getElementById(
+                "edit-player-name"
+            )
+            .value =
+                player.nombre;
+
+
+        document
+            .getElementById(
+                "edit-player-surname"
+            )
+            .value =
+                player.apellidos;
+
+
+        document
+            .getElementById(
+                "edit-player-position"
+            )
+            .value =
+                player.posicion;
+
+
+        document
+            .getElementById(
+                "edit-player-foot"
+            )
+            .value =
+                player.lateralidad ||
+                "";
+
+
+        document
+            .getElementById(
+                "edit-player-message"
+            )
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById(
+                "edit-modal"
+            )
+            .classList
+            .remove("hidden");
+
+    }
+
+
+    function closeEditPlayer() {
+
+        document
+            .getElementById(
+                "edit-modal"
+            )
+            .classList
+            .add("hidden");
+
+    }
+
+
+    async function saveEditedPlayer(event) {
+
+        event.preventDefault();
+
+
+        const id =
+            Number(
+                document
+                    .getElementById(
+                        "edit-player-id"
+                    )
+                    .value
+            );
+
+
+        const updates = {
+
+            nombre:
+                document
+                    .getElementById(
+                        "edit-player-name"
+                    )
+                    .value
+                    .trim(),
+
+            apellidos:
+                document
+                    .getElementById(
+                        "edit-player-surname"
+                    )
+                    .value
+                    .trim(),
+
+            posicion:
+                document
+                    .getElementById(
+                        "edit-player-position"
+                    )
+                    .value,
+
+            lateralidad:
+                document
+                    .getElementById(
+                        "edit-player-foot"
+                    )
+                    .value ||
+                null
+
+        };
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("jugadores")
+                .update(updates)
+                .eq(
+                    "id",
+                    id
+                )
+                .select()
+                .single();
+
+
+        if (error) {
+
+            showMessage(
+                "edit-player-message",
+                "No se ha podido guardar: " +
+                error.message,
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const index =
+            players.findIndex(
+                p =>
+                    Number(p.id) ===
+                    id
+            );
+
+
+        if (index !== -1) {
+
+            players[index] =
+                data;
+
+        }
+
+
+        sortPlayers();
+
+
+        renderPlayers();
+
+        renderRateSelectors();
+
+
+        closeEditPlayer();
+
+
+        showMessage(
+            "player-message",
+            "Jugador actualizado correctamente.",
+            "success"
+        );
+
+    }
+
+
+    /* ============================================================
        VALORACIONES
-    ========================================================= */
+    ============================================================ */
 
     function setupRating() {
 
@@ -2354,44 +3193,64 @@
 
 
         sessionSelect.innerHTML =
-            `<option value="">
+            `
+            <option value="">
                 Selecciona una sesión
-            </option>` +
+            </option>
+            ` +
             sessions
-                .map(session => {
+                .map(
+                    session => {
 
-                    const title =
-                        session.titulo ||
-                        session.tipo;
+                        const title =
+                            session.titulo ||
+                            session.tipo;
 
 
-                    return `
-                        <option value="${session.id}">
-                            ${formatDate(session.fecha)}
-                            · ${escapeHtml(title)}
-                        </option>
-                    `;
+                        return `
+                            <option
+                                value="${session.id}"
+                            >
+                                ${formatDate(session.fecha)}
+                                ·
+                                ${escapeHtml(title)}
+                            </option>
+                        `;
 
-                })
+                    }
+                )
                 .join("");
 
 
         playerSelect.innerHTML =
-            `<option value="">
+            `
+            <option value="">
                 Selecciona un jugador
-            </option>` +
+            </option>
+            ` +
             players
-                .map(player => {
+                .map(
+                    player => {
 
-                    return `
-                        <option value="${player.id}">
-                            ${escapeHtml(player.nombre)}
-                            ${escapeHtml(player.apellidos)}
-                            · ${escapeHtml(player.posicion)}
-                        </option>
-                    `;
+                        return `
+                            <option
+                                value="${player.id}"
+                            >
+                                ${escapeHtml(
+                                    player.nombre
+                                )}
+                                ${escapeHtml(
+                                    player.apellidos
+                                )}
+                                ·
+                                ${escapeHtml(
+                                    player.posicion
+                                )}
+                            </option>
+                        `;
 
-                })
+                    }
+                )
                 .join("");
 
 
@@ -2458,10 +3317,20 @@
             );
 
 
-        if (!sessionId || !playerId) {
+        if (
+            !sessionId ||
+            !playerId
+        ) {
 
-            area.classList.add("hidden");
-            empty.classList.remove("hidden");
+            area
+                .classList
+                .add("hidden");
+
+
+            empty
+                .classList
+                .remove("hidden");
+
 
             return;
 
@@ -2477,40 +3346,54 @@
 
 
         if (!player) {
+
             return;
+
         }
 
 
-        area.classList.remove("hidden");
-        empty.classList.add("hidden");
+        area
+            .classList
+            .remove("hidden");
+
+
+        empty
+            .classList
+            .add("hidden");
 
 
         document
             .getElementById(
                 "selected-player-info"
             )
-            .innerHTML = `
+            .innerHTML =
+                `
+                <h3>
+                    ${escapeHtml(
+                        player.nombre
+                    )}
+                    ${escapeHtml(
+                        player.apellidos
+                    )}
+                </h3>
 
-                <div style="margin-bottom:20px;">
+                <span class="badge">
+                    ${escapeHtml(
+                        player.posicion
+                    )}
+                </span>
 
-                    <h3 style="margin-bottom:7px;">
-                        ${escapeHtml(player.nombre)}
-                        ${escapeHtml(player.apellidos)}
-                    </h3>
-
-                    <span class="badge">
-                        ${escapeHtml(player.posicion)}
-                    </span>
-
-                    <span class="badge">
-                        ${escapeHtml(
-                            player.lateralidad ||
-                            "Lateralidad pendiente"
-                        )}
-                    </span>
-
-                </div>
-            `;
+                <span class="${
+                    player.lateralidad
+                        ? "badge"
+                        : "badge badge-pending"
+                }">
+                    ${escapeHtml(
+                        player.lateralidad ||
+                        "Lateralidad pendiente"
+                    )}
+                </span>
+                `;
 
 
         await loadExistingRating(
@@ -2520,8 +3403,12 @@
 
 
         renderCriteria(
-            player.posicion === "Portero"
+            player.posicion ===
+            "Portero"
         );
+
+
+        updatePersonalAverage();
 
     }
 
@@ -2559,6 +3446,7 @@
         if (error) {
 
             console.error(error);
+
             return;
 
         }
@@ -2570,14 +3458,17 @@
                 .getElementById(
                     "rating-comment"
                 )
-                .value = "";
+                .value =
+                    "";
+
 
             return;
 
         }
 
 
-        currentRating = data;
+        currentRating =
+            data;
 
 
         document
@@ -2602,87 +3493,100 @@
 
 
         const visibleCriteria =
-            criteria.filter(c => {
+            criteria.filter(
+                criterion => {
 
-                if (
-                    c.key === "paradas"
-                ) {
+                    if (
+                        criterion.key ===
+                        "paradas"
+                    ) {
 
-                    return isGoalkeeper;
+                        return isGoalkeeper;
+
+                    }
+
+
+                    return true;
 
                 }
-
-                return true;
-
-            });
+            );
 
 
         container.innerHTML =
             visibleCriteria
-                .map(c => {
+                .map(
+                    criterion => {
 
-                    const current =
-                        currentRating[c.key] ??
-                        "";
+                        const current =
+                            currentRating[
+                                criterion.key
+                            ] ??
+                            "";
 
 
-                    return `
+                        return `
+                            <div class="criterion">
 
-                        <div class="criterion">
+                                <div class="criterion-title">
+                                    ${escapeHtml(
+                                        criterion.label
+                                    )}
+                                </div>
 
-                            <div class="criterion-title">
-                                ${escapeHtml(c.label)}
+
+                                <div
+                                    class="rating-buttons"
+                                    data-criterion="${criterion.key}"
+                                >
+
+                                    ${Array.from(
+                                        {
+                                            length: 10
+                                        },
+                                        (_, index) => {
+
+                                            const value =
+                                                index + 1;
+
+
+                                            const selected =
+                                                Number(
+                                                    current
+                                                ) === value
+                                                    ? "selected"
+                                                    : "";
+
+
+                                            return `
+                                                <button
+                                                    type="button"
+                                                    class="rating-btn ${selected}"
+                                                    data-value="${value}"
+                                                    onclick="setRating('${criterion.key}',${value})"
+                                                >
+                                                    ${value}
+                                                </button>
+                                            `;
+
+                                        }
+                                    ).join("")}
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="clear-rating"
+                                    onclick="clearCriterion('${criterion.key}')"
+                                >
+                                    Quitar valoración
+                                </button>
+
                             </div>
+                        `;
 
-                            <div
-                                class="rating-buttons"
-                                data-criterion="${c.key}"
-                            >
-
-                                ${Array.from(
-                                    {length:10},
-                                    (_,index) => {
-
-                                        const value =
-                                            index + 1;
-
-                                        const selected =
-                                            Number(current) === value
-                                                ? "selected"
-                                                : "";
-
-                                        return `
-
-                                            <button
-                                                type="button"
-                                                class="rating-btn ${selected}"
-                                                data-value="${value}"
-                                                onclick="setRating('${c.key}',${value})"
-                                            >
-                                                ${value}
-                                            </button>
-
-                                        `;
-
-                                    }
-                                ).join("")}
-
-                            </div>
-
-
-                            <button
-                                type="button"
-                                class="clear-rating"
-                                onclick="clearCriterion('${c.key}')"
-                            >
-                                Quitar valoración
-                            </button>
-
-                        </div>
-
-                    `;
-
-                })
+                    }
+                )
                 .join("");
 
     }
@@ -2693,7 +3597,9 @@
         value
     ) {
 
-        currentRating[criterion] =
+        currentRating[
+            criterion
+        ] =
             Number(value);
 
 
@@ -2701,18 +3607,23 @@
             .querySelectorAll(
                 `[data-criterion="${criterion}"] .rating-btn`
             )
-            .forEach(button => {
+            .forEach(
+                button => {
 
-                button
-                    .classList
-                    .toggle(
-                        "selected",
-                        Number(
-                            button.dataset.value
-                        ) === value
-                    );
+                    button
+                        .classList
+                        .toggle(
+                            "selected",
+                            Number(
+                                button.dataset.value
+                            ) === value
+                        );
 
-            });
+                }
+            );
+
+
+        updatePersonalAverage();
 
     }
 
@@ -2721,20 +3632,29 @@
         criterion
     ) {
 
-        delete currentRating[criterion];
+        delete currentRating[
+            criterion
+        ];
 
 
         document
             .querySelectorAll(
                 `[data-criterion="${criterion}"] .rating-btn`
             )
-            .forEach(button => {
+            .forEach(
+                button => {
 
-                button
-                    .classList
-                    .remove("selected");
+                    button
+                        .classList
+                        .remove(
+                            "selected"
+                        );
 
-            });
+                }
+            );
+
+
+        updatePersonalAverage();
 
     }
 
@@ -2748,7 +3668,8 @@
             .getElementById(
                 "rating-comment"
             )
-            .value = "";
+            .value =
+                "";
 
 
         const playerId =
@@ -2776,6 +3697,93 @@
 
         }
 
+
+        updatePersonalAverage();
+
+    }
+
+
+    function updatePersonalAverage() {
+
+        const playerId =
+            document
+                .getElementById(
+                    "rate-player"
+                )
+                .value;
+
+
+        if (!playerId) {
+
+            return;
+
+        }
+
+
+        const player =
+            players.find(
+                p =>
+                    String(p.id) ===
+                    playerId
+            );
+
+
+        if (!player) {
+
+            return;
+
+        }
+
+
+        const values =
+            criteria
+                .filter(
+                    criterion => {
+
+                        if (
+                            criterion.key ===
+                            "paradas" &&
+                            player.posicion !==
+                            "Portero"
+                        ) {
+
+                            return false;
+
+                        }
+
+
+                        return true;
+
+                    }
+                )
+                .map(
+                    criterion =>
+                        currentRating[
+                            criterion.key
+                        ]
+                )
+                .filter(
+                    value =>
+                        value !==
+                            null &&
+                        value !==
+                            undefined &&
+                        value !==
+                            ""
+                );
+
+
+        const result =
+            average(values);
+
+
+        document
+            .getElementById(
+                "personal-average"
+            )
+            .textContent =
+                formatAverage(result);
+
     }
 
 
@@ -2801,7 +3809,10 @@
             );
 
 
-        if (!sessionId || !playerId) {
+        if (
+            !sessionId ||
+            !playerId
+        ) {
 
             showMessage(
                 "rating-message",
@@ -2817,9 +3828,16 @@
         const player =
             players.find(
                 p =>
-                    p.id ===
+                    Number(p.id) ===
                     playerId
             );
+
+
+        if (!player) {
+
+            return;
+
+        }
 
 
         const payload = {
@@ -2834,20 +3852,35 @@
                 currentCoach.id,
 
             control: null,
+
             pase: null,
+
             cabeceo: null,
+
             golpeo: null,
+
             regate: null,
+
             posicionamiento: null,
+
             decisiones: null,
+
             trabajo_colectivo: null,
+
             resistencia: null,
+
             velocidad: null,
+
             fuerza: null,
+
             agilidad: null,
+
             motivacion: null,
+
             implicacion: null,
+
             liderazgo: null,
+
             paradas: null,
 
             comentario:
@@ -2862,32 +3895,45 @@
         };
 
 
-        criteria.forEach(c => {
+        criteria.forEach(
+            criterion => {
 
-            if (
-                c.key === "paradas" &&
-                player.posicion !==
-                    "Portero"
-            ) {
-                return;
+                if (
+                    criterion.key ===
+                        "paradas" &&
+                    player.posicion !==
+                        "Portero"
+                ) {
+
+                    return;
+
+                }
+
+
+                const value =
+                    currentRating[
+                        criterion.key
+                    ];
+
+
+                if (
+                    value !==
+                        undefined &&
+                    value !==
+                        null &&
+                    value !==
+                        ""
+                ) {
+
+                    payload[
+                        criterion.key
+                    ] =
+                        Number(value);
+
+                }
+
             }
-
-
-            if (
-                currentRating[c.key] !==
-                    undefined &&
-                currentRating[c.key] !==
-                    ""
-            ) {
-
-                payload[c.key] =
-                    Number(
-                        currentRating[c.key]
-                    );
-
-            }
-
-        });
+        );
 
 
         const {
@@ -2908,12 +3954,14 @@
 
             console.error(error);
 
+
             showMessage(
                 "rating-message",
                 "No se ha podido guardar la valoración: " +
                 error.message,
                 "error"
             );
+
 
             return;
 
@@ -2932,9 +3980,9 @@
     }
 
 
-    /* =========================================================
+    /* ============================================================
        RESUMEN
-    ========================================================= */
+    ============================================================ */
 
     function renderSummarySessions() {
 
@@ -2949,25 +3997,32 @@
 
 
         select.innerHTML =
-            `<option value="">
+            `
+            <option value="">
                 Selecciona una sesión
-            </option>` +
+            </option>
+            ` +
             sessions
-                .map(session => {
+                .map(
+                    session => {
 
-                    const title =
-                        session.titulo ||
-                        session.tipo;
+                        const title =
+                            session.titulo ||
+                            session.tipo;
 
 
-                    return `
-                        <option value="${session.id}">
-                            ${formatDate(session.fecha)}
-                            · ${escapeHtml(title)}
-                        </option>
-                    `;
+                        return `
+                            <option
+                                value="${session.id}"
+                            >
+                                ${formatDate(session.fecha)}
+                                ·
+                                ${escapeHtml(title)}
+                            </option>
+                        `;
 
-                })
+                    }
+                )
                 .join("");
 
 
@@ -3015,8 +4070,15 @@
 
         if (!sessionId) {
 
-            container.classList.add("hidden");
-            empty.classList.remove("hidden");
+            container
+                .classList
+                .add("hidden");
+
+
+            empty
+                .classList
+                .remove("hidden");
+
 
             return;
 
@@ -3057,8 +4119,14 @@
         }
 
 
-        container.classList.remove("hidden");
-        empty.classList.add("hidden");
+        container
+            .classList
+            .remove("hidden");
+
+
+        empty
+            .classList
+            .add("hidden");
 
 
         const tbody =
@@ -3069,92 +4137,111 @@
 
         tbody.innerHTML =
             players
-                .map(player => {
+                .map(
+                    player => {
 
-                    const ratings =
-                        data.filter(
-                            r =>
-                                r.jugador_id ===
-                                player.id
+                        const ratings =
+                            data.filter(
+                                rating =>
+                                    Number(
+                                        rating.jugador_id
+                                    ) ===
+                                    Number(
+                                        player.id
+                                    )
+                            );
+
+
+                        const values = {};
+
+
+                        ratings.forEach(
+                            rating => {
+
+                                if (
+                                    rating.entrenadores
+                                ) {
+
+                                    values[
+                                        rating
+                                            .entrenadores
+                                            .nombre
+                                    ] =
+                                        getOverallAverage(
+                                            rating,
+                                            player.posicion
+                                        );
+
+                                }
+
+                            }
                         );
 
 
-                    const values = {};
-
-
-                    ratings.forEach(r => {
-
-                        values[
-                            r.entrenadores.nombre
-                        ] =
-                            getOverallAverage(
-                                r,
-                                player.posicion
-                            );
-
-                    });
-
-
-                    const available =
-                        Object.values(values)
+                        const available =
+                            Object.values(
+                                values
+                            )
                             .filter(
-                                v =>
-                                    v !== null
+                                value =>
+                                    value !==
+                                    null
                             );
 
 
-                    const overall =
-                        average(
-                            available
-                        );
+                        const overall =
+                            average(
+                                available
+                            );
 
 
-                    return `
+                        return `
+                            <tr>
 
-                        <tr>
+                                <td>
+                                    ${escapeHtml(
+                                        player.nombre
+                                    )}
+                                    ${escapeHtml(
+                                        player.apellidos
+                                    )}
+                                </td>
 
-                            <td>
-                                ${escapeHtml(
-                                    player.nombre
-                                )}
-                                ${escapeHtml(
-                                    player.apellidos
-                                )}
-                            </td>
+                                <td>
+                                    ${formatAverage(
+                                        values["Arkaitz"]
+                                    )}
+                                </td>
 
-                            <td>
-                                ${formatAverage(
-                                    values["Arkaitz"]
-                                )}
-                            </td>
+                                <td>
+                                    ${formatAverage(
+                                        values["Aritz"]
+                                    )}
+                                </td>
 
-                            <td>
-                                ${formatAverage(
-                                    values["Aritz"]
-                                )}
-                            </td>
+                                <td>
+                                    ${formatAverage(
+                                        values["Garikoitz"]
+                                    )}
+                                </td>
 
-                            <td>
-                                ${formatAverage(
-                                    values["Garikoitz"]
-                                )}
-                            </td>
+                                <td class="average">
+                                    ${formatAverage(
+                                        overall
+                                    )}
+                                </td>
 
-                            <td class="average">
-                                ${formatAverage(
-                                    overall
-                                )}
-                            </td>
+                            </tr>
+                        `;
 
-                        </tr>
-
-                    `;
-
-                })
+                    }
+                )
                 .join("");
 
 
-        renderSummaryDetail(data);
+        renderSummaryDetail(
+            data
+        );
 
     }
 
@@ -3172,17 +4259,19 @@
         if (!data.length) {
 
             container.innerHTML =
-                `<div class="empty">
+                `
+                <div class="empty">
                     Todavía no hay valoraciones.
-                </div>`;
+                </div>
+                `;
 
             return;
 
         }
 
 
-        container.innerHTML = `
-
+        container.innerHTML =
+            `
             <div class="card">
 
                 <h3>
@@ -3190,8 +4279,8 @@
                 </h3>
 
                 <p style="color:#667085;">
-                    Media de los entrenadores que
-                    hayan puntuado cada criterio.
+                    Media de los entrenadores que hayan
+                    puntuado cada criterio.
                 </p>
 
                 <div class="table-wrapper">
@@ -3205,12 +4294,15 @@
                                 <th>Jugador</th>
 
                                 ${criteria
-                                    .map(c =>
-                                        `<th>
-                                            ${escapeHtml(
-                                                c.label
-                                            )}
-                                        </th>`
+                                    .map(
+                                        criterion =>
+                                            `
+                                            <th>
+                                                ${escapeHtml(
+                                                    criterion.label
+                                                )}
+                                            </th>
+                                            `
                                     )
                                     .join("")}
 
@@ -3220,108 +4312,126 @@
 
                         </thead>
 
+
                         <tbody>
 
                             ${players
-                                .map(player => {
+                                .map(
+                                    player => {
 
-                                    const ratings =
-                                        data.filter(
-                                            r =>
-                                                r.jugador_id ===
-                                                player.id
-                                        );
-
-
-                                    if (
-                                        !ratings.length
-                                    ) {
-                                        return "";
-                                    }
-
-
-                                    return `
-
-                                        <tr>
-
-                                            <td>
-                                                ${escapeHtml(
-                                                    player.nombre
-                                                )}
-                                                ${escapeHtml(
-                                                    player.apellidos
-                                                )}
-                                            </td>
-
-
-                                            ${criteria
-                                                .map(c => {
-
-                                                    if (
-                                                        c.key ===
-                                                        "paradas" &&
-                                                        player.posicion !==
-                                                        "Portero"
-                                                    ) {
-
-                                                        return `
-                                                            <td>—</td>
-                                                        `;
-
-                                                    }
-
-
-                                                    const values =
-                                                        ratings
-                                                            .map(
-                                                                r =>
-                                                                    r[c.key]
-                                                            )
-                                                            .filter(
-                                                                v =>
-                                                                    v !== null &&
-                                                                    v !== undefined
-                                                            );
-
-
-                                                    return `
-                                                        <td>
-                                                            ${formatAverage(
-                                                                average(
-                                                                    values
-                                                                )
-                                                            )}
-                                                        </td>
-                                                    `;
-
-                                                })
-                                                .join("")}
-
-
-                                            <td class="average">
-                                                ${formatAverage(
-                                                    average(
-                                                        ratings
-                                                            .map(
-                                                                r =>
-                                                                    getOverallAverage(
-                                                                        r,
-                                                                        player.posicion
-                                                                    )
-                                                            )
-                                                            .filter(
-                                                                v =>
-                                                                    v !== null
-                                                            )
+                                        const ratings =
+                                            data.filter(
+                                                rating =>
+                                                    Number(
+                                                        rating.jugador_id
+                                                    ) ===
+                                                    Number(
+                                                        player.id
                                                     )
-                                                )}
-                                            </td>
+                                            );
 
-                                        </tr>
 
-                                    `;
+                                        if (
+                                            !ratings.length
+                                        ) {
 
-                                })
+                                            return "";
+
+                                        }
+
+
+                                        return `
+                                            <tr>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        player.nombre
+                                                    )}
+                                                    ${escapeHtml(
+                                                        player.apellidos
+                                                    )}
+                                                </td>
+
+
+                                                ${criteria
+                                                    .map(
+                                                        criterion => {
+
+                                                            if (
+                                                                criterion.key ===
+                                                                    "paradas" &&
+                                                                player.posicion !==
+                                                                    "Portero"
+                                                            ) {
+
+                                                                return `
+                                                                    <td>
+                                                                        —
+                                                                    </td>
+                                                                `;
+
+                                                            }
+
+
+                                                            const values =
+                                                                ratings
+                                                                    .map(
+                                                                        rating =>
+                                                                            rating[
+                                                                                criterion.key
+                                                                            ]
+                                                                    )
+                                                                    .filter(
+                                                                        value =>
+                                                                            value !==
+                                                                                null &&
+                                                                            value !==
+                                                                                undefined
+                                                                    );
+
+
+                                                            return `
+                                                                <td>
+                                                                    ${formatAverage(
+                                                                        average(
+                                                                            values
+                                                                        )
+                                                                    )}
+                                                                </td>
+                                                            `;
+
+                                                        }
+                                                    )
+                                                    .join("")}
+
+
+                                                <td class="average">
+
+                                                    ${formatAverage(
+                                                        average(
+                                                            ratings
+                                                                .map(
+                                                                    rating =>
+                                                                        getOverallAverage(
+                                                                            rating,
+                                                                            player.posicion
+                                                                        )
+                                                                )
+                                                                .filter(
+                                                                    value =>
+                                                                        value !==
+                                                                        null
+                                                                )
+                                                        )
+                                                    )}
+
+                                                </td>
+
+                                            </tr>
+                                        `;
+
+                                    }
+                                )
                                 .join("")}
 
                         </tbody>
@@ -3331,8 +4441,7 @@
                 </div>
 
             </div>
-
-        `;
+            `;
 
     }
 
@@ -3344,40 +4453,54 @@
 
         const values =
             criteria
-                .filter(c => {
+                .filter(
+                    criterion => {
 
-                    if (
-                        c.key === "paradas" &&
-                        position !== "Portero"
-                    ) {
+                        if (
+                            criterion.key ===
+                                "paradas" &&
+                            position !==
+                                "Portero"
+                        ) {
 
-                        return false;
+                            return false;
+
+                        }
+
+
+                        return true;
 
                     }
-
-                    return true;
-
-                })
-                .map(c =>
-                    rating[c.key]
+                )
+                .map(
+                    criterion =>
+                        rating[
+                            criterion.key
+                        ]
                 )
                 .filter(
-                    v =>
-                        v !== null &&
-                        v !== undefined
+                    value =>
+                        value !==
+                            null &&
+                        value !==
+                            undefined
                 );
 
 
-        return average(values);
+        return average(
+            values
+        );
 
     }
 
 
-    /* =========================================================
+    /* ============================================================
        UTILIDADES
-    ========================================================= */
+    ============================================================ */
 
-    function average(values) {
+    function average(
+        values
+    ) {
 
         if (
             !values ||
@@ -3393,8 +4516,10 @@
             values
                 .map(Number)
                 .filter(
-                    n =>
-                        !Number.isNaN(n)
+                    number =>
+                        !Number.isNaN(
+                            number
+                        )
                 );
 
 
@@ -3407,8 +4532,11 @@
 
         return (
             numbers.reduce(
-                (sum,value) =>
-                    sum + value,
+                (
+                    total,
+                    value
+                ) =>
+                    total + value,
                 0
             ) /
             numbers.length
@@ -3417,11 +4545,15 @@
     }
 
 
-    function formatAverage(value) {
+    function formatAverage(
+        value
+    ) {
 
         if (
-            value === null ||
-            value === undefined ||
+            value ===
+                null ||
+            value ===
+                undefined ||
             Number.isNaN(
                 Number(value)
             )
@@ -3438,10 +4570,14 @@
     }
 
 
-    function formatDate(dateString) {
+    function formatDate(
+        dateString
+    ) {
 
         if (!dateString) {
+
             return "";
+
         }
 
 
@@ -3449,8 +4585,13 @@
             dateString.split("-");
 
 
-        if (parts.length !== 3) {
+        if (
+            parts.length !==
+            3
+        ) {
+
             return dateString;
+
         }
 
 
@@ -3477,25 +4618,37 @@
             );
 
 
+        if (!element) {
+
+            return;
+
+        }
+
+
         element.textContent =
             text;
 
 
         element.className =
-            `message ${type}`;
+            "message " +
+            type;
 
 
-        element.classList.remove(
-            "hidden"
-        );
+        element
+            .classList
+            .remove(
+                "hidden"
+            );
 
 
         setTimeout(
             () => {
 
-                element.classList.add(
-                    "hidden"
-                );
+                element
+                    .classList
+                    .add(
+                        "hidden"
+                    );
 
             },
             5000
@@ -3504,11 +4657,15 @@
     }
 
 
-    function escapeHtml(value) {
+    function escapeHtml(
+        value
+    ) {
 
         if (
-            value === null ||
-            value === undefined
+            value ===
+                null ||
+            value ===
+                undefined
         ) {
 
             return "";
@@ -3517,26 +4674,45 @@
 
 
         return String(value)
-            .replaceAll("&","&amp;")
-            .replaceAll("<","&lt;")
-            .replaceAll(">","&gt;")
-            .replaceAll('"',"&quot;")
-            .replaceAll("'","&#039;");
+            .replaceAll(
+                "&",
+                "&amp;"
+            )
+            .replaceAll(
+                "<",
+                "&lt;"
+            )
+            .replaceAll(
+                ">",
+                "&gt;"
+            )
+            .replaceAll(
+                '"',
+                "&quot;"
+            )
+            .replaceAll(
+                "'",
+                "&#039;"
+            );
 
     }
 
 
-    /* =========================================================
-       CAMBIOS DE AUTENTICACION
-    ========================================================= */
+    /* ============================================================
+       AUTENTICACION
+    ============================================================ */
 
     supabaseClient
         .auth
         .onAuthStateChange(
-            async (event, session) => {
+            async (
+                event,
+                session
+            ) => {
 
                 if (
-                    event === "SIGNED_IN" &&
+                    event ===
+                        "SIGNED_IN" &&
                     session
                 ) {
 
