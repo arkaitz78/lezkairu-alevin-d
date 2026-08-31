@@ -2834,12 +2834,23 @@
 
                                 </div>
 
-                                <button
-                                    class="small-btn btn-secondary"
-                                    onclick="selectSessionForRating(${session.id})"
-                                >
-                                    ⭐ Valorar
-                                </button>
+                                <div class="player-actions">
+
+                                    <button
+                                        class="small-btn btn-secondary"
+                                        onclick="selectSessionForRating(${session.id})"
+                                    >
+                                        ⭐ Valorar
+                                    </button>
+
+                                    <button
+                                        class="small-btn btn-danger"
+                                        onclick="deleteSession(${session.id})"
+                                    >
+                                        🗑️ Eliminar
+                                    </button>
+
+                                </div>
 
                             </div>
                         `;
@@ -2848,6 +2859,132 @@
                 )
                 .join("");
 
+    }
+
+
+    async function deleteSession(id) {
+
+        const session =
+            sessions.find(
+                s =>
+                    Number(s.id) ===
+                    Number(id)
+            );
+
+        if (!session) {
+            return;
+        }
+
+        const sessionName =
+            (
+                formatDate(session.fecha) +
+                " · " +
+                (session.titulo || session.tipo)
+            );
+
+        const confirmed =
+            window.confirm(
+                "¿Seguro que quieres eliminar esta sesión?\n\n" +
+                sessionName +
+                "\n\n" +
+                "También se eliminarán TODAS las valoraciones de esta sesión. Esta acción no se puede deshacer."
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const {
+            error: ratingsError
+        } =
+            await supabaseClient
+                .from("valoraciones")
+                .delete()
+                .eq(
+                    "sesion_id",
+                    Number(id)
+                );
+
+        if (ratingsError) {
+
+            console.error(ratingsError);
+
+            showMessage(
+                "session-message",
+                "No se han podido eliminar las valoraciones de la sesión. No se ha borrado la sesión.",
+                "error"
+            );
+
+            return;
+        }
+
+        const {
+            error: sessionError
+        } =
+            await supabaseClient
+                .from("sesiones")
+                .delete()
+                .eq(
+                    "id",
+                    Number(id)
+                );
+
+        if (sessionError) {
+
+            console.error(sessionError);
+
+            showMessage(
+                "session-message",
+                "No se ha podido eliminar la sesión: " +
+                sessionError.message,
+                "error"
+            );
+
+            return;
+        }
+
+        sessions =
+            sessions.filter(
+                s =>
+                    Number(s.id) !==
+                    Number(id)
+            );
+
+        renderSessions();
+        renderRateSelectors();
+        renderSummarySessions();
+
+        document
+            .getElementById("rate-session")
+            .value = "";
+
+        document
+            .getElementById("rate-player")
+            .value = "";
+
+        updateRatingVisibility();
+
+        document
+            .getElementById("summary-session")
+            .value = "";
+
+        document
+            .getElementById("summary-container")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("summary-empty")
+            .classList
+            .remove("hidden");
+
+        await updateStats();
+
+        showMessage(
+            "session-message",
+            "Sesión y sus valoraciones eliminadas correctamente.",
+            "success"
+        );
     }
 
 
