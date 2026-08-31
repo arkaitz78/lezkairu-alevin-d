@@ -698,6 +698,11 @@
             margin-bottom: 20px;
         }
 
+        .data-table td,
+        .data-table th {
+            white-space: nowrap;
+        }
+
         .profile-stat {
             background: white;
             border: 1px solid var(--borde);
@@ -887,6 +892,21 @@
                 text-align: center;
             }
         }
+    
+        @media (max-width: 700px) {
+            .profile-stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-criteria {
+                grid-template-columns: 1fr;
+            }
+
+            .player-profile-header {
+                flex-direction: column;
+            }
+        }
+
     </style>
 </head>
 
@@ -1599,6 +1619,30 @@
                     <h3>📊 Media histórica por criterio</h3>
                     <p style="color:#667085;">Media de todas las valoraciones disponibles del jugador.</p>
                     <div id="profile-criteria" class="profile-criteria"></div>
+                </div>
+
+                <div class="card" style="margin-bottom:20px;">
+                    <h3>📈 Evolución por sesiones</h3>
+                    <p style="color:#667085;">Consulta cómo ha evolucionado cada criterio a lo largo de entrenamientos y partidos.</p>
+                    <div class="form-group" style="max-width:420px; margin-top:15px;">
+                        <label for="profile-evolution-criterion">Criterio</label>
+                        <select id="profile-evolution-criterion"></select>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Sesión</th>
+                                    <th>Arkaitz</th>
+                                    <th>Aritz</th>
+                                    <th>Garikoitz</th>
+                                    <th>Media</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profile-evolution-body"></tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -4352,6 +4396,8 @@
         renderProfileHeader(player);
         renderProfileStats(ratings, player);
         renderProfileCriteria(ratings, player);
+        setupProfileEvolution(ratings, player);
+        renderProfileEvolution(ratings, player);
         renderProfileHistory(ratings, player);
 
     }
@@ -4484,6 +4530,161 @@
                 )
                 .join("");
 
+    }
+
+
+    function setupProfileEvolution(ratings, player) {
+
+        const select =
+            document.getElementById(
+                "profile-evolution-criterion"
+            );
+
+        if (!select) {
+            return;
+        }
+
+        const current = select.value;
+
+        const visibleCriteria =
+            criteria.filter(
+                criterion =>
+                    criterion.key !== "paradas" ||
+                    player.posicion === "Portero"
+            );
+
+        select.innerHTML =
+            visibleCriteria
+                .map(
+                    criterion => `
+                        <option value="${escapeHtml(criterion.key)}">
+                            ${escapeHtml(criterion.label)}
+                        </option>
+                    `
+                )
+                .join("");
+
+        if (
+            current &&
+            visibleCriteria.some(
+                criterion => criterion.key === current
+            )
+        ) {
+            select.value = current;
+        } else if (visibleCriteria.length) {
+            select.value = visibleCriteria[0].key;
+        }
+
+        select.onchange = () => {
+            renderProfileEvolution(ratings, player);
+        };
+    }
+
+
+    function renderProfileEvolution(ratings, player) {
+
+        const select =
+            document.getElementById(
+                "profile-evolution-criterion"
+            );
+
+        const body =
+            document.getElementById(
+                "profile-evolution-body"
+            );
+
+        if (!select || !body || !select.value) {
+            return;
+        }
+
+        const key = select.value;
+
+        const sortedRatings =
+            [...ratings].sort(
+                (a, b) => {
+                    const dateA = a.sesiones?.fecha || "";
+                    const dateB = b.sesiones?.fecha || "";
+                    if (dateA !== dateB) {
+                        return dateA.localeCompare(dateB);
+                    }
+                    return Number(a.sesion_id || 0) - Number(b.sesion_id || 0);
+                }
+            );
+
+        const sessionsMap = new Map();
+
+        sortedRatings.forEach(rating => {
+            const sessionId = rating.sesion_id;
+            if (!sessionId) {
+                return;
+            }
+
+            if (!sessionsMap.has(sessionId)) {
+                sessionsMap.set(
+                    sessionId,
+                    {
+                        session: rating.sesiones || {},
+                        values: {}
+                    }
+                );
+            }
+
+            const coachName =
+                rating.entrenadores?.nombre || "";
+
+            const value = rating[key];
+
+            if (
+                coachName &&
+                value !== null &&
+                value !== undefined &&
+                value !== ""
+            ) {
+                sessionsMap.get(sessionId).values[coachName] = Number(value);
+            }
+        });
+
+        const rows = [...sessionsMap.values()];
+
+        if (!rows.length) {
+            body.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        Todavía no hay valoraciones para este criterio.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        body.innerHTML =
+            rows
+                .map(item => {
+                    const arkaitz = item.values.Arkaitz ?? null;
+                    const aritz = item.values.Aritz ?? null;
+                    const garikoitz = item.values.Garikoitz ?? null;
+                    const media = average(
+                        [arkaitz, aritz, garikoitz]
+                            .filter(value => value !== null)
+                    );
+
+                    const sessionTitle =
+                        item.session.titulo ||
+                        item.session.tipo ||
+                        "Sesión";
+
+                    return `
+                        <tr>
+                            <td>${formatDate(item.session.fecha)}</td>
+                            <td>${escapeHtml(sessionTitle)}</td>
+                            <td>${formatAverage(arkaitz)}</td>
+                            <td>${formatAverage(aritz)}</td>
+                            <td>${formatAverage(garikoitz)}</td>
+                            <td><strong>${formatAverage(media)}</strong></td>
+                        </tr>
+                    `;
+                })
+                .join("");
     }
 
 
