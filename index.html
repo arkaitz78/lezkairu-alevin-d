@@ -823,6 +823,46 @@
             text-decoration: underline;
         }
 
+
+        /* =====================================================
+           GRAFICO DE EVOLUCION
+        ===================================================== */
+
+        .evolution-chart-wrap {
+            margin-top: 18px;
+            border: 1px solid var(--borde);
+            border-radius: 13px;
+            background: white;
+            padding: 12px;
+        }
+
+        .evolution-chart-title {
+            font-weight: 800;
+            color: var(--azul);
+            margin-bottom: 8px;
+        }
+
+        #profile-evolution-chart {
+            width: 100%;
+            height: 300px;
+            display: block;
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+            color: var(--gris);
+            font-size: 12px;
+        }
+
+        .chart-note {
+            margin-top: 8px;
+            color: var(--gris);
+            font-size: 12px;
+        }
+
         /* =====================================================
            RESPONSIVE
         ===================================================== */
@@ -1628,7 +1668,16 @@
                         <label for="profile-evolution-criterion">Criterio</label>
                         <select id="profile-evolution-criterion"></select>
                     </div>
-                    <div class="table-wrapper">
+                    <div class="evolution-chart-wrap">
+                        <div class="evolution-chart-title">Gráfico de evolución</div>
+                        <canvas id="profile-evolution-chart"></canvas>
+                        <div class="chart-legend">
+                            <span>● Media de la sesión</span>
+                        </div>
+                        <div class="chart-note">La línea representa la media de las valoraciones disponibles de Arkaitz, Aritz y Garikoitz en cada sesión.</div>
+                    </div>
+
+                    <div class="table-wrapper" style="margin-top:18px;">
                         <table class="data-table">
                             <thead>
                                 <tr>
@@ -4604,9 +4653,11 @@
                 (a, b) => {
                     const dateA = a.sesiones?.fecha || "";
                     const dateB = b.sesiones?.fecha || "";
+
                     if (dateA !== dateB) {
                         return dateA.localeCompare(dateB);
                     }
+
                     return Number(a.sesion_id || 0) - Number(b.sesion_id || 0);
                 }
             );
@@ -4614,7 +4665,9 @@
         const sessionsMap = new Map();
 
         sortedRatings.forEach(rating => {
+
             const sessionId = rating.sesion_id;
+
             if (!sessionId) {
                 return;
             }
@@ -4644,9 +4697,30 @@
             }
         });
 
-        const rows = [...sessionsMap.values()];
+        const rows =
+            [...sessionsMap.values()]
+                .map(item => {
+
+                    const arkaitz = item.values.Arkaitz ?? null;
+                    const aritz = item.values.Aritz ?? null;
+                    const garikoitz = item.values.Garikoitz ?? null;
+
+                    const media = average(
+                        [arkaitz, aritz, garikoitz]
+                            .filter(value => value !== null)
+                    );
+
+                    return {
+                        ...item,
+                        arkaitz,
+                        aritz,
+                        garikoitz,
+                        media
+                    };
+                });
 
         if (!rows.length) {
+
             body.innerHTML = `
                 <tr>
                     <td colspan="6">
@@ -4654,19 +4728,15 @@
                     </td>
                 </tr>
             `;
+
+            drawEvolutionChart([]);
+
             return;
         }
 
         body.innerHTML =
             rows
                 .map(item => {
-                    const arkaitz = item.values.Arkaitz ?? null;
-                    const aritz = item.values.Aritz ?? null;
-                    const garikoitz = item.values.Garikoitz ?? null;
-                    const media = average(
-                        [arkaitz, aritz, garikoitz]
-                            .filter(value => value !== null)
-                    );
 
                     const sessionTitle =
                         item.session.titulo ||
@@ -4677,15 +4747,250 @@
                         <tr>
                             <td>${formatDate(item.session.fecha)}</td>
                             <td>${escapeHtml(sessionTitle)}</td>
-                            <td>${formatAverage(arkaitz)}</td>
-                            <td>${formatAverage(aritz)}</td>
-                            <td>${formatAverage(garikoitz)}</td>
-                            <td><strong>${formatAverage(media)}</strong></td>
+                            <td>${formatAverage(item.arkaitz)}</td>
+                            <td>${formatAverage(item.aritz)}</td>
+                            <td>${formatAverage(item.garikoitz)}</td>
+                            <td><strong>${formatAverage(item.media)}</strong></td>
                         </tr>
                     `;
                 })
                 .join("");
+
+        drawEvolutionChart(rows);
     }
+
+
+    function drawEvolutionChart(rows) {
+
+        const canvas =
+            document.getElementById(
+                "profile-evolution-chart"
+            );
+
+        if (!canvas) {
+            return;
+        }
+
+        const rect = canvas.getBoundingClientRect();
+        const cssWidth = Math.max(300, Math.floor(rect.width || 700));
+        const cssHeight = 300;
+        const ratio = window.devicePixelRatio || 1;
+
+        canvas.width = cssWidth * ratio;
+        canvas.height = cssHeight * ratio;
+
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
+            return;
+        }
+
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+        const left = 48;
+        const right = 18;
+        const top = 20;
+        const bottom = 55;
+        const chartWidth = cssWidth - left - right;
+        const chartHeight = cssHeight - top - bottom;
+
+        ctx.font = "12px Arial";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+
+        for (let value = 1; value <= 10; value++) {
+
+            const y =
+                top +
+                chartHeight *
+                (1 - ((value - 1) / 9));
+
+            ctx.beginPath();
+            ctx.moveTo(left, y);
+            ctx.lineTo(cssWidth - right, y);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#e4e8ed";
+            ctx.stroke();
+
+            ctx.fillStyle = "#667085";
+            ctx.fillText(
+                String(value),
+                left - 8,
+                y
+            );
+        }
+
+        if (!rows.length) {
+
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#667085";
+            ctx.fillText(
+                "Todavía no hay datos suficientes para mostrar el gráfico.",
+                cssWidth / 2,
+                cssHeight / 2
+            );
+
+            return;
+        }
+
+        const points =
+            rows.map(
+                (row, index) => {
+
+                    const x =
+                        rows.length === 1
+                            ? left + chartWidth / 2
+                            : left +
+                              chartWidth *
+                              (index / (rows.length - 1));
+
+                    const value = row.media;
+
+                    if (value === null || value === undefined) {
+                        return {
+                            x,
+                            y: null,
+                            row
+                        };
+                    }
+
+                    const y =
+                        top +
+                        chartHeight *
+                        (1 - ((Number(value) - 1) / 9));
+
+                    return {
+                        x,
+                        y,
+                        row
+                    };
+                }
+            );
+
+        const validPoints =
+            points.filter(point => point.y !== null);
+
+        if (validPoints.length) {
+
+            ctx.beginPath();
+
+            validPoints.forEach(
+                (point, index) => {
+
+                    if (index === 0) {
+                        ctx.moveTo(point.x, point.y);
+                    } else {
+                        ctx.lineTo(point.x, point.y);
+                    }
+
+                }
+            );
+
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#123f70";
+            ctx.lineJoin = "round";
+            ctx.lineCap = "round";
+            ctx.stroke();
+
+            validPoints.forEach(
+                point => {
+
+                    ctx.beginPath();
+                    ctx.arc(
+                        point.x,
+                        point.y,
+                        5,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fillStyle = "#123f70";
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.arc(
+                        point.x,
+                        point.y,
+                        2,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fillStyle = "white";
+                    ctx.fill();
+
+                }
+            );
+        }
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+
+        points.forEach(
+            (point, index) => {
+
+                const session = point.row.session || {};
+                const date = formatDate(session.fecha);
+                const type = session.tipo || "";
+
+                let label = date;
+
+                if (type) {
+                    label += " · " + type;
+                }
+
+                if (label.length > 22) {
+                    label = label.substring(0, 22) + "…";
+                }
+
+                ctx.fillStyle = "#667085";
+                ctx.fillText(
+                    label,
+                    point.x,
+                    cssHeight - bottom + 14
+                );
+
+                if (point.y !== null) {
+
+                    ctx.fillStyle = "#123f70";
+                    ctx.font = "bold 12px Arial";
+                    ctx.fillText(
+                        formatAverage(point.row.media),
+                        point.x,
+                        point.y - 20
+                    );
+                    ctx.font = "12px Arial";
+                }
+            }
+        );
+    }
+
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            const select =
+                document.getElementById(
+                    "profile-player"
+                );
+
+            if (!select || !select.value) {
+                return;
+            }
+
+            const criterionSelect =
+                document.getElementById(
+                    "profile-evolution-criterion"
+                );
+
+            if (!criterionSelect || !criterionSelect.value) {
+                return;
+            }
+
+            /* El gráfico se redibuja al cambiar el tamaño de pantalla. */
+            renderPlayerProfile();
+        }
+    );
 
 
     function renderProfileHistory(ratings, player) {
