@@ -3290,6 +3290,13 @@
                                         ✏️ Editar
                                     </button>
 
+                                    <button
+                                        class="small-btn btn-danger"
+                                        onclick="deactivatePlayer(${player.id})"
+                                    >
+                                        🚪 Dar de baja
+                                    </button>
+
                                 </div>
 
                             </div>
@@ -3298,6 +3305,75 @@
                     }
                 )
                 .join("");
+
+    }
+
+
+    async function deactivatePlayer(id) {
+
+        const player =
+            players.find(
+                p => Number(p.id) === Number(id)
+            );
+
+        if (!player) {
+            return;
+        }
+
+        const confirmed =
+            window.confirm(
+                "¿Seguro que quieres dar de baja a " +
+                player.nombre + " " + player.apellidos +
+                "?\n\n" +
+                "Dejará de aparecer en la plantilla y no se podrá valorar en nuevas sesiones. " +
+                "Su ficha histórica y sus valoraciones se conservarán."
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("jugadores")
+                .update({ activo: false })
+                .eq("id", Number(id))
+                .select()
+                .maybeSingle();
+
+        if (error || !data) {
+
+            console.error(error);
+
+            showMessage(
+                "player-message",
+                "No se ha podido dar de baja al jugador. " +
+                (error ? error.message : "No se ha confirmado el cambio en la base de datos."),
+                "error"
+            );
+
+            return;
+        }
+
+        players =
+            players.filter(
+                p => Number(p.id) !== Number(id)
+            );
+
+        renderPlayers();
+        renderRateSelectors();
+        renderProfilePlayers();
+        renderPlayerProfile();
+        updateStats();
+
+        showMessage(
+            "player-message",
+            "Jugador dado de baja. Su historial se ha conservado.",
+            "success"
+        );
 
     }
 
